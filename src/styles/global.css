@@ -4,7 +4,7 @@
   --color-text: #0c0a0a;
   --color-muted: #5a5c63;
   --color-accent: #146a7a;
-  --color-accent-hover: #8f3232;
+  --color-accent-hover: #b33d98;
 
 
   --font-serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
@@ -78,7 +78,38 @@ main {
   display: block;
 }
 
+.container {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
 /* ===== ACCESSIBILITY ===== */
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+/* ===== COMPONENT STYLES ===== */
+
+/* Header component styles */
+nav {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.site-name {
+  display: inline-block;
+}
+
+/* Hero Main component styles */
+.hero-main {
+  padding: 4rem 0;
+  text-align: left;
+}
+
+.hero-main h1 {
+  font-size: 4.5rem;
+  margin-bottom: 0;
+  text-wrap: balance;
 }

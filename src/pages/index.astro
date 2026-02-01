@@ -1,7 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ReadingList from "../components/ReadingList.astro";
+import ListeningList from "../components/ListeningList.astro";
+import WorkingList from "../components/WorkingList.astro";
+
 ---
 <BaseLayout>
-  <h1>Test</h1>
-  <p>this is an <a href="#">example</a></p>
+  <Hero />
+  <!-- <ReadingList items={now.reading} />
+  <ListeningList items={now.listening} />
+  <WorkingList items={now.working} /> -->
 </BaseLayout>
