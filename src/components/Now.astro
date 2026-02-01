@@ -1,0 +1,25 @@
+---
+import ReadingList from "../components/ReadingList.astro";
+import ListeningList from "../components/ListeningList.astro";
+import { reading } from "../content/now/reading";
+import WorkingList from "../components/WorkingList.astro";
+import { working } from "../content/now/working";
+---
+
+<section class="section section-now">
+    <div class="container">
+        <h2>Currently.</h2>
+        <!-- <p>What I’m reading, listening to, and working on right now.</p> -->
+
+        <div class="section-now__grid">
+            <ReadingList items={reading} />
+            <div class="section-now__grid-item">
+                <h3>Listening</h3>
+                <ListeningList />
+            </div>
+            
+            <WorkingList items={working} />
+            
+        </div>
+    </div>
+</section>

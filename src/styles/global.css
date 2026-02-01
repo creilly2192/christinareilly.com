@@ -5,6 +5,7 @@
   --color-muted: #5a5c63;
   --color-accent: #146a7a;
   --color-accent-hover: #b33d98;
+  --color-dramatic: #051c20;
 
 
   --font-serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
@@ -43,6 +44,11 @@ h3 {
   font-weight: 500;
   line-height: var(--leading-heading);
   margin: 0;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 p {
@@ -85,6 +91,10 @@ main {
     padding: 0 1rem;
 }
 
+.section {
+    padding: 4rem 0;
+}
+
 /* ===== ACCESSIBILITY ===== */
 :focus:not(:focus-visible) {
   outline: none;
@@ -113,7 +123,7 @@ footer {
 
 /* Hero Main component styles */
 .hero-main {
-  padding: 4rem 0;
+  padding: 6rem 0;
   text-align: left;
 }
 
@@ -130,4 +140,44 @@ footer {
   font-family: var(--font-sans);
   margin-top: 0.5rem;
   text-wrap: balance;
+}
+
+/* Now component styles */
+.section-now {
+  background-color: var(--color-purple-muted);
+}
+
+.section-now__grid {
+  display: grid;
+  grid-template: "left right-top"
+  "left right-bottom";
+  gap: 2rem;
+}
+
+.section-now__grid-item:first-child {
+    grid-area: left;
+}
+
+.section-now__grid-item:nth-child(2) {
+    grid-area: right-top;
+}
+
+.section-now__grid-item:nth-child(3) {
+    grid-area: right-bottom;
+}
+
+
+/* Reading styles */
+.reading-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.reading-list__cover {
+    display: none;
+}
+
+.reading-list__status {
+    text-transform: capitalize;
 }

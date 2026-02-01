@@ -1,0 +1,22 @@
+---
+import type { WorkingItem } from "../content/now.types";
+
+type Props = { items?: WorkingItem[] };
+const { items = [] } = Astro.props as Props;
+
+---
+ 
+ <div class="section-now__grid-item">
+    <h3>Working On</h3>
+        {items.length === 0 ? (
+          <p>No current projects</p>
+        ) : (
+          <ul>
+            {items.map((item) => (
+              <li key={item.id}>
+                {item.text}
+              </li>
+            ))}
+          </ul>
+        )}
+</div>

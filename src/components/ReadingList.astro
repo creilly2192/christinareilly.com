@@ -1,0 +1,41 @@
+---
+import type { ReadingItem } from "../content/now.types";
+
+type Props = { items?: ReadingItem[] };
+const { items = [] } = Astro.props as Props;
+
+const formatMonthYear = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+---
+
+
+
+<div class="section-now__grid-item">
+    <h3>Reading</h3>
+     {items.length === 0 ? (
+    <p class="muted">Nothing listed yet.</p>
+  ) : (
+    <ul class="reading-list">
+      {items.map((item) => (
+        <li class="reading-list__item">
+            {item.status === "current" ? (
+              <span class="reading-list__status" >{item.status}</span>
+            ) : null}
+            <div class="reading-list__inner">
+                {item.status === "finished" ? (
+              <span class="reading-list__icon" >Finished {item.date ? formatMonthYear(item.date) : null}</span>
+            ) : null}
+                <figure class="reading-list__cover"></figure>
+                <div class="reading-list__content">
+                    <strong>{item.title}</strong> by {item.author}
+                    {item.note ? <p class="reading-list__note">{item.note}</p> : null}
+                </div>
+            </div>
+        </li>
+      ))}
+    </ul>
+  )}           
+</div>
