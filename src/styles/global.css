@@ -9,6 +9,7 @@
 
   --font-serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
   --font-sans: "Inter", ui-sans-serif, sans-serif;
+  --font-body: "Crimson Pro", Georgia, serif;
 
   --leading-body: 1.6;
   --leading-heading: 1.25;
@@ -28,7 +29,7 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -92,6 +93,10 @@ main {
 /* ===== COMPONENT STYLES ===== */
 
 /* Header component styles */
+header {
+    padding: 2rem 0;
+}
+
 nav {
   font-family: var(--font-serif);
   font-weight: 400;
@@ -101,6 +106,10 @@ nav {
 .site-name {
   display: inline-block;
 }
+/* Footer component styles */
+footer {
+    padding: 2rem 0;
+}
 
 /* Hero Main component styles */
 .hero-main {
@@ -108,8 +117,17 @@ nav {
   text-align: left;
 }
 
-.hero-main h1 {
+.hero-main__title {
   font-size: 4.5rem;
   margin-bottom: 0;
+  font-weight: 900;
+  text-wrap: balance;
+}
+
+.hero-main__deck {
+  font-size: 1.875rem;
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  margin-top: 0.5rem;
   text-wrap: balance;
 }
