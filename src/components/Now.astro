@@ -4,6 +4,7 @@ import ListeningList from "../components/ListeningList.astro";
 import { reading } from "../content/now/reading";
 import WorkingList from "../components/WorkingList.astro";
 import { working } from "../content/now/working";
+import { listening } from "../content/now/listening";
 ---
 
 <section class="section section-now">
@@ -13,11 +14,7 @@ import { working } from "../content/now/working";
 
         <div class="section-now__grid">
             <ReadingList items={reading} />
-            <div class="section-now__grid-item">
-                <h3>Listening</h3>
-                <ListeningList />
-            </div>
-            
+            <ListeningList items={listening} /> 
             <WorkingList items={working} />
             
         </div>
