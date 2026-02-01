@@ -1,0 +1,37 @@
+---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/crimson-pro/400.css";
+import "@fontsource/crimson-pro/500.css";
+import "@fontsource/crimson-pro/600.css";
+
+import { SEO } from "astro-seo";
+
+// interface Props {
+//   title: string;
+//   description?: string;
+// }
+
+// const { title, description } = Astro.props;
+
+import "../styles/global.css";
+
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEO
+      title="Christina Reilly Portfolio"
+      description="Senior web developer."
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body> 
+    
+    <main>
+        <slot />
+    </main>
+  </body>
+</html>

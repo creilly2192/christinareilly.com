@@ -1,0 +1,84 @@
+/* ===== CSS TOKENS ===== */
+:root {
+  --color-bg: #FAFAF8;
+  --color-text: #0c0a0a;
+  --color-muted: #5a5c63;
+  --color-accent: #146a7a;
+  --color-accent-hover: #8f3232;
+
+
+  --font-serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, sans-serif;
+
+  --leading-body: 1.6;
+  --leading-heading: 1.25;
+}
+
+/* ===== BASE RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: var(--leading-heading);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* Book titles, later essay titles */
+em {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* ===== LINKS & FOCUS ===== */
+a {
+  color: var(--color-accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent-hover);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===== LAYOUT DEFAULTS ===== */
+main {
+  display: block;
+}
+
+/* ===== ACCESSIBILITY ===== */
+:focus:not(:focus-visible) {
+  outline: none;
+}
