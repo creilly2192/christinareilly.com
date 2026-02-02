@@ -25,86 +25,88 @@ const pastReads = items.filter((i) => i.status === "finished");
     ) : (
       <>
         <div class="reading-list__wrapper">
-          {currentReads.length > 0 && (
-            <ul class="reading-list">
-              {currentReads.map((item) => (
-                <li class="reading-list__item">
-                  {/* {item.status === "current" ? (
+          <div class="reading-list__fade-wrapper">
+            {currentReads.length > 0 && (
+              <ul class="reading-list">
+                {currentReads.map((item) => (
+                  <li class="reading-list__item">
+                    {/* {item.status === "current" ? (
               <span class="reading-list__status" />
             ) : null} */}
-                  <div class="reading-list__inner">
-                    {item.cover && (
-                      <a
-                        href={`${item.goodreadsLink}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <figure class="reading-list__cover">
-                          <img
-                            src={`${base}covers/${item.cover}`}
-                            alt={`Cover of ${item.title}`}
-                            loading="lazy"
-                            decoding="async"
-                            width="72"
-                            height="108"
-                          />
-                        </figure>
-                      </a>
-                    )}
-                    <div class="reading-list__content">
-                      <p class="reading-list__title">
-                        <strong>{item.title}</strong>
-                      </p>
-                      <span class="reading-list__author">{item.author}</span>
-                      {item.note ? (
-                        <p class="reading-list__note">{item.note}</p>
-                      ) : null}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {pastReads.length > 0 && (
-            <>
-              <h3 class="reading-list__subhead">Past Reads</h3>
-              <ul class="reading-list reading-list--past">
-                {pastReads.map((item) => (
-                  <li class="reading-list__item">
                     <div class="reading-list__inner">
                       {item.cover && (
-                        <figure class="reading-list__cover">
-                          <img
-                            src={`${base}covers/${item.cover}`}
-                            alt={item.coverAlt ?? `Cover of ${item.title}`}
-                            loading="lazy"
-                            decoding="async"
-                            width="72"
-                            height="108"
-                          />
-                        </figure>
+                        <a
+                          href={`${item.goodreadsLink}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <figure class="reading-list__cover">
+                            <img
+                              src={`${base}covers/${item.cover}`}
+                              alt={`Cover of ${item.title}`}
+                              loading="lazy"
+                              decoding="async"
+                              width="72"
+                              height="108"
+                            />
+                          </figure>
+                        </a>
                       )}
                       <div class="reading-list__content">
                         <p class="reading-list__title">
                           <strong>{item.title}</strong>
                         </p>
-                        {item.author && (
-                          <span class="reading-list__author">
-                            {item.author}
-                          </span>
-                        )}
-                        {item.note && (
+                        <span class="reading-list__author">{item.author}</span>
+                        {item.note ? (
                           <p class="reading-list__note">{item.note}</p>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                   </li>
                 ))}
               </ul>
-            </>
-          )}
-          <div class="fade-indicator" />
+            )}
+
+            {pastReads.length > 0 && (
+              <>
+                <h3 class="reading-list__subhead">Past Reads</h3>
+                <ul class="reading-list reading-list--past">
+                  {pastReads.map((item) => (
+                    <li class="reading-list__item">
+                      <div class="reading-list__inner">
+                        {item.cover && (
+                          <figure class="reading-list__cover">
+                            <img
+                              src={`${base}covers/${item.cover}`}
+                              alt={item.coverAlt ?? `Cover of ${item.title}`}
+                              loading="lazy"
+                              decoding="async"
+                              width="72"
+                              height="108"
+                            />
+                          </figure>
+                        )}
+                        <div class="reading-list__content">
+                          <p class="reading-list__title">
+                            <strong>{item.title}</strong>
+                          </p>
+                          {item.author && (
+                            <span class="reading-list__author">
+                              {item.author}
+                            </span>
+                          )}
+                          {item.note && (
+                            <p class="reading-list__note">{item.note}</p>
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <div class="fade-indicator" />
+          </div>
         </div>
       </>
     )

@@ -261,7 +261,12 @@ footer {
 .section-now--reading {
   position: relative;
 }
+
 .reading-list__wrapper {
+  position: relative;
+}
+
+.reading-list__fade-wrapper {
   max-height: 23.4375rem;
   overflow-y: auto;
 }
@@ -326,15 +331,9 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 5.625rem;
   background: linear-gradient(to bottom, transparent, var(--color-bg));
   pointer-events: none;
-}
-
-@media screen and (max-width: 768px) {
-  .reading-list__wrapper {
-    max-height: 12.5rem;
-  }
 }
 
 /* Listening styles */

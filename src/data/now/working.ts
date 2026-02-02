@@ -11,6 +11,6 @@ export const working: WorkingItem[] = [
     text: "A personal daily feed to reduce choice and increase focus, built from curated RSS feeds and a lightweight python script.",
   },
   {
-    text: "Listeing my way through the top albums of all time, one week at a time.",
+    text: "Listening my way through the top albums of all time, one week at a time.",
   },
 ];
