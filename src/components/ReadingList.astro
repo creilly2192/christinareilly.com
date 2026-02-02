@@ -34,16 +34,22 @@ const pastReads = items.filter((i) => i.status === "finished");
             ) : null} */}
                   <div class="reading-list__inner">
                     {item.cover && (
-                      <figure class="reading-list__cover">
-                        <img
-                          src={`${base}covers/${item.cover}`}
-                          alt={item.coverAlt ? `Cover of ${item.title}` : null}
-                          loading="lazy"
-                          decoding="async"
-                          width="72"
-                          height="108"
-                        />
-                      </figure>
+                      <a
+                        href={`${item.goodreadsLink}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <figure class="reading-list__cover">
+                          <img
+                            src={`${base}covers/${item.cover}`}
+                            alt={`Cover of ${item.title}`}
+                            loading="lazy"
+                            decoding="async"
+                            width="72"
+                            height="108"
+                          />
+                        </figure>
+                      </a>
                     )}
                     <div class="reading-list__content">
                       <p class="reading-list__title">
