@@ -1,5 +1,7 @@
 ---
-import type { ReadingItem } from "../content/now.types";
+import type { ReadingItem } from "../data/now.types";
+
+const base = import.meta.env.BASE_URL;
 
 type Props = { items?: ReadingItem[] };
 const { items = [] } = Astro.props as Props;
@@ -9,33 +11,96 @@ const formatMonthYear = (iso: string) =>
     month: "long",
     year: "numeric",
   });
+
+// Split items
+const currentReads = items.filter((i) => i.status === "current");
+const pastReads = items.filter((i) => i.status === "finished");
 ---
 
+<div class="section-now__grid-item section-now--reading">
+  <h3>Reading</h3>
+  {
+    items.length === 0 ? (
+      <p class="muted">Nothing listed yet.</p>
+    ) : (
+      <>
+        <div class="reading-list__wrapper">
+          {currentReads.length > 0 && (
+            <ul class="reading-list">
+              {currentReads.map((item) => (
+                <li class="reading-list__item">
+                  {/* {item.status === "current" ? (
+              <span class="reading-list__status" />
+            ) : null} */}
+                  <div class="reading-list__inner">
+                    {item.cover && (
+                      <figure class="reading-list__cover">
+                        <img
+                          src={`${base}covers/${item.cover}`}
+                          alt={item.coverAlt ? `Cover of ${item.title}` : null}
+                          loading="lazy"
+                          decoding="async"
+                          width="72"
+                          height="108"
+                        />
+                      </figure>
+                    )}
+                    <div class="reading-list__content">
+                      <p class="reading-list__title">
+                        <strong>{item.title}</strong>
+                      </p>
+                      <span class="reading-list__author">{item.author}</span>
+                      {item.note ? (
+                        <p class="reading-list__note">{item.note}</p>
+                      ) : null}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
 
-
-<div class="section-now__grid-item">
-    <h3>Reading</h3>
-     {items.length === 0 ? (
-    <p class="muted">Nothing listed yet.</p>
-  ) : (
-    <ul class="reading-list">
-      {items.map((item) => (
-        <li class="reading-list__item">
-            {item.status === "current" ? (
-              <span class="reading-list__status" >{item.status}</span>
-            ) : null}
-            <div class="reading-list__inner">
-                {item.status === "finished" ? (
-              <span class="reading-list__icon" >Finished {item.date ? formatMonthYear(item.date) : null}</span>
-            ) : null}
-                <figure class="reading-list__cover"></figure>
-                <div class="reading-list__content">
-                    <strong>{item.title}</strong> by {item.author}
-                    {item.note ? <p class="reading-list__note">{item.note}</p> : null}
-                </div>
-            </div>
-        </li>
-      ))}
-    </ul>
-  )}           
+          {pastReads.length > 0 && (
+            <>
+              <h3 class="reading-list__subhead">Past Reads</h3>
+              <ul class="reading-list reading-list--past">
+                {pastReads.map((item) => (
+                  <li class="reading-list__item">
+                    <div class="reading-list__inner">
+                      {item.cover && (
+                        <figure class="reading-list__cover">
+                          <img
+                            src={`${base}covers/${item.cover}`}
+                            alt={item.coverAlt ?? `Cover of ${item.title}`}
+                            loading="lazy"
+                            decoding="async"
+                            width="72"
+                            height="108"
+                          />
+                        </figure>
+                      )}
+                      <div class="reading-list__content">
+                        <p class="reading-list__title">
+                          <strong>{item.title}</strong>
+                        </p>
+                        {item.author && (
+                          <span class="reading-list__author">
+                            {item.author}
+                          </span>
+                        )}
+                        {item.note && (
+                          <p class="reading-list__note">{item.note}</p>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <div class="fade-indicator" />
+        </div>
+      </>
+    )
+  }
 </div>

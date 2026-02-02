@@ -1,32 +1,39 @@
 ---
-import type { ListeningItem } from "../content/now.types";
+import type { ListeningItem } from "../data/now.types";
 
 type Props = { items?: ListeningItem[] };
 const { items = [] } = Astro.props as Props;
-
 ---
 
 <div class="section-now__grid-item">
-    <h3>Listening</h3>
-        {items.length === 0 ? (
-          <p class="muted">Nothing listed yet.</p>
-        ) : (
-          <ul class="listening-list">
-            {items.map((item) => (
-              <li class="listening-list__item">
-                <div class="listening-list__content">
-                  <strong>{item.title}</strong> by {item.artist}
-                  {item.note ? <p class="listening-list__note">{item.note}</p> : null}
+  <h3>Listening</h3>
+  {
+    items.length === 0 ? (
+      <p class="muted">Nothing listed yet.</p>
+    ) : (
+      <ul class="listening-list">
+        {items.map((item) => (
+          <li class="listening-list__item">
+            <div class="listening-list__content">
+              <strong>{item.title}</strong> by {item.artist}
+              {item.note ? (
+                <p class="listening-list__note">
+                  {item.note}
                   {item.link ? (
-                    <p>
-                      <a href={item.link} target="_blank" rel="noopener noreferrer">
-                        Listen here
-                      </a>
-                    </p>
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Listen here
+                    </a>
                   ) : null}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+                </p>
+              ) : null}
+            </div>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </div>
