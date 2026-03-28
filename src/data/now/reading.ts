@@ -2,10 +2,21 @@ import type { ReadingItem } from "../now.types";
 
 export const reading: ReadingItem[] = [
   {
-    title: "Sunrise on the Reaping",
-    author: "Suzanne Collins",
+    title: "McTeague",
+    author: "Frank Norris",
     status: "current",
     date: null,
+    year_read: 2026,
+    note: "A dark tale of greed and downfall in San Francisco set in the late 19th century.",
+    cover: "mcteague-gr.webp",
+    goodreadsLink:
+      "https://www.goodreads.com/en/book/show/168655.McTeague",
+  },
+  {
+    title: "Sunrise on the Reaping",
+    author: "Suzanne Collins",
+    status: "finished",
+    date: "2026-02-85",
     year_read: 2026,
     note: "A prequel to The Hunger Games, exploring the origins of the Haymitch.",
     cover: "reaping-gr.webp",
@@ -15,9 +26,9 @@ export const reading: ReadingItem[] = [
   {
     title: "Wuthering Heights",
     author: "Emily Brontë",
-    status: "current",
+    status: "finished",
     year_read: 2026,
-    date: null,
+    date: "2026-02-12",
     note: "A gothic tale of love and revenge (mostly revenge) on the moors.",
     cover: "wuthering-heights-gr.webp",
     goodreadsLink:
