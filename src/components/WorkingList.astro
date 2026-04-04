@@ -12,11 +12,28 @@ const { items = [] } = Astro.props as Props;
       <p>No current projects</p>
     ) : (
       <ul class="working-list">
-        {items.map((item) => (
-          <li key={item.id} class="working-list__item">
-            &mdash; {item.text}
-          </li>
-        ))}
+        {items.map((item) => {
+          const renderText = () => {
+            if (!item.link || !item.linkText) {
+              return item.text;
+            }
+            const parts = item.text.split(item.linkText);
+            return (
+              <>
+                {parts[0]}
+                <a href={item.link} target="_blank">
+                  {item.linkText}
+                </a>
+                {parts[1]}
+              </>
+            );
+          };
+          return (
+            <li key={item.id} class="working-list__item">
+              &mdash; {renderText()}
+            </li>
+          );
+        })}
       </ul>
     )
   }

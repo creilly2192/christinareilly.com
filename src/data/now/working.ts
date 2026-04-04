@@ -12,5 +12,7 @@ export const working: WorkingItem[] = [
   },
   {
     text: "Listening my way through the top albums of all time, one week at a time.",
+    link: "https://quiet-sorbet-c4e74e.netlify.app/",
+    linkText: "top albums",
   },
 ];

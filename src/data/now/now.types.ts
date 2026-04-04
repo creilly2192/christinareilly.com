@@ -18,4 +18,6 @@ export type ListeningItem = {
 
 export type WorkingItem = {
   text: string;
+  link?: string;
+  linkText?: string;
 };
