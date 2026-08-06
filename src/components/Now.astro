@@ -4,7 +4,39 @@ import ListeningList from "../components/ListeningList.astro";
 import { reading } from "../data/now/reading";
 import WorkingList from "../components/WorkingList.astro";
 import { working } from "../data/now/working";
-import { listening } from "../data/now/listening";
+import type { ListeningItem } from "../data/now/now.types";
+
+// Fetch the current album from albumlog at build time.
+// Falls back to an empty list if the request fails or returns no album.
+let listening: ListeningItem[] = [];
+
+try {
+  const res = await fetch(
+    "https://quiet-sorbet-c4e74e.netlify.app/api/now.json",
+  );
+  if (res.ok) {
+    const data = (await res.json()) as {
+      album: {
+        title: string;
+        artist: string;
+        year: number;
+        notes: string | null;
+      } | null;
+    };
+    if (data.album) {
+      listening = [
+        {
+          title: data.album.title,
+          artist: data.album.artist,
+          // Use notes from albumlog as the display note if present
+          note: "Trying to sit with this album all week without skipping.",
+        },
+      ];
+    }
+  }
+} catch {
+  // Network failure at build time — render with no listening item
+}
 ---
 
 <section class="section section-now">
