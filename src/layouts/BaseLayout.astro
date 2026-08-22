@@ -14,11 +14,10 @@ import { SEO } from "astro-seo";
 
 // const { title, description } = Astro.props;
 
-import "../styles/global.css";
+import "../styles/global.scss";
 
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-
+import Header from "../components/Header/Header.astro";
+import Footer from "../components/Footer/Footer.astro";
 ---
 
 <!doctype html>
@@ -31,12 +30,11 @@ import Footer from "../components/Footer.astro";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
   </head>
-  <body> 
-    
+  <body>
     <main>
-        <Header />
-        <slot />
-        <Footer />
+      <Header />
+      <slot />
+      <Footer />
     </main>
   </body>
 </html>

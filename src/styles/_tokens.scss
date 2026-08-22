@@ -1,0 +1,22 @@
+/* ===== CSS TOKENS ===== */
+:root {
+  --color-bg: #fafaf8;
+  --color-text: #0c0a0a;
+  --color-muted: #5a5c63;
+  --color-accent: #b33d98;
+  --color-accent-hover: #146a7a;
+  --color-dramatic: #051c20;
+  // Placeholder — light tint of --color-accent, used as the "Now" section
+  // background. Referenced but never defined in the old global.css; eyeball
+  // it and adjust if it doesn't read right.
+  --color-purple-muted: #f4ecf3;
+
+  --border: rgba(17, 17, 17, 0.1);
+
+  --font-serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, sans-serif;
+  --font-body: "Crimson Pro", Georgia, serif;
+
+  --leading-body: 1.6;
+  --leading-heading: 1.25;
+}

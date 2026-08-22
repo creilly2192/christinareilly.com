@@ -1,0 +1,80 @@
+/* Reading styles */
+.section-now--reading {
+  position: relative;
+}
+
+.reading-list__wrapper {
+  position: relative;
+}
+
+.reading-list__fade-wrapper {
+  max-height: 23.4375rem;
+  overflow-y: auto;
+  padding-bottom: 3rem;
+}
+
+.reading-list {
+  list-style: none;
+  margin: 1.5rem 0 0 0;
+  padding: 0;
+}
+
+.reading-list__item {
+  padding: 1rem 0;
+  /**border-bottom: 0.0625rem solid var(--border);**/
+}
+
+.reading-list__item:first-child {
+  padding-top: 0;
+}
+
+.reading-list__inner {
+  display: flex;
+  gap: 1rem;
+}
+
+.reading-list__finished {
+  text-align: right;
+  padding-left: 1.5rem;
+}
+
+.reading-list__cover {
+  margin: 0;
+}
+
+.reading-list__title {
+  line-height: 1.1;
+  font-style: italic;
+}
+
+.reading-list__author {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.reading-list__note {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  text-wrap: balance;
+}
+
+.reading-list__status {
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.reading-list__content {
+  padding-right: 1.5rem;
+}
+
+.fade-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5.625rem;
+  background: linear-gradient(to bottom, transparent, var(--color-bg));
+  pointer-events: none;
+}

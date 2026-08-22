@@ -9,8 +9,7 @@ export const reading: ReadingItem[] = [
     year_read: 2026,
     note: "A dark tale of greed and downfall in San Francisco set in the late 19th century.",
     cover: "mcteague-gr.webp",
-    goodreadsLink:
-      "https://www.goodreads.com/en/book/show/168655.McTeague",
+    goodreadsLink: "https://www.goodreads.com/en/book/show/168655.McTeague",
   },
   {
     title: "Sunrise on the Reaping",

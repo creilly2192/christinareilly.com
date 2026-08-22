@@ -1,5 +1,5 @@
 ---
-import type { ListeningItem } from "../data/now.types";
+import type { ListeningItem } from "../../data/now.types";
 
 type Props = { items?: ListeningItem[] };
 const { items = [] } = Astro.props as Props;
@@ -37,3 +37,7 @@ const { items = [] } = Astro.props as Props;
     )
   }
 </div>
+
+<style lang="scss">
+  @use "./ListeningList.scss";
+</style>

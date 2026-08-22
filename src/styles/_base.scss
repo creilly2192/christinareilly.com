@@ -1,0 +1,78 @@
+/* ===== TYPOGRAPHY ===== */
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: var(--leading-heading);
+  margin: 0;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 2.25rem;
+  }
+}
+
+/* Book titles, later essay titles */
+em {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ===== LINKS & FOCUS ===== */
+a {
+  color: var(--color-accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition:
+    color 0.3s ease,
+    text-decoration-color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent-hover);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ===== LAYOUT DEFAULTS ===== */
+main {
+  display: block;
+}
+
+.container {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+/* ===== ACCESSIBILITY ===== */
+:focus:not(:focus-visible) {
+  outline: none;
+}

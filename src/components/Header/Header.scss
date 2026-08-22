@@ -1,0 +1,14 @@
+/* Header component styles */
+header {
+  padding: 2rem 0;
+}
+
+nav {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.site-name {
+  display: inline-block;
+}
