@@ -1,43 +1,87 @@
 ---
 import type { WorkingItem } from "../../data/now/now.types";
+import StatusTag from "../StatusTag/StatusTag.astro";
+import IconBadge from "../IconBadge/IconBadge.astro";
 
 type Props = { items?: WorkingItem[] };
 const { items = [] } = Astro.props as Props;
+
+// Bento sizing by position, not content: card 0 is the hero block, card 1 is
+// a wide banner, everything after is a small tile — matches the fixed
+// working.ts order (tiny human, day job, then side projects).
+const sizeForIndex = (i: number) => {
+  if (i === 0) return "hero";
+  if (i === 1) return "banner";
+  return "tile";
+};
 ---
 
-<div class="section-now__grid-item">
-  <h3>Working On</h3>
-  {
-    items.length === 0 ? (
-      <p>No current projects</p>
-    ) : (
-      <ul class="working-list">
-        {items.map((item) => {
-          const renderText = () => {
-            if (!item.link || !item.linkText) {
-              return item.text;
-            }
-            const parts = item.text.split(item.linkText);
-            return (
-              <>
-                {parts[0]}
-                <a href={item.link} target="_blank">
-                  {item.linkText}
-                </a>
-                {parts[1]}
-              </>
-            );
-          };
-          return (
-            <li key={item.id} class="working-list__item">
-              &mdash; {renderText()}
-            </li>
-          );
-        })}
-      </ul>
-    )
-  }
-</div>
+<section class="section section-working">
+  <div class="container">
+    <h2 class="section-heading">
+      Working On <span class="color-blush">.</span>
+    </h2>
+    {
+      items.length === 0 ? (
+        <p>No current projects</p>
+      ) : (
+        <>
+          <p class="working-list__description">
+            Sized roughly to how much room each one actually takes up in my
+            life.
+          </p>
+          <ul class="working-list">
+            {items.map((item, i) => {
+              const size = sizeForIndex(i);
+              // Project cards are whole-card links (arrow badge, no inline
+              // hyperlink in the copy); hero/banner cards stay plain divs.
+              const CardTag = item.link ? "a" : "div";
+              const cardProps = item.link
+                ? {
+                    href: item.link,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  }
+                : {};
+              return (
+                <li
+                  class:list={[
+                    "working-list__item",
+                    `working-list__item--${size}`,
+                  ]}
+                >
+                  <CardTag class="working-list__card" {...cardProps}>
+                    <div class="working-list__top">
+                      {item.isProject ? (
+                        <span class="working-list__project-tag">Project</span>
+                      ) : item.icon ? (
+                        <IconBadge name={item.icon} shape="sticker" />
+                      ) : null}
+                      {item.link && (
+                        <span class="working-list__external-icon">
+                          <IconBadge name="arrow-up-right" shape="sticker" />
+                        </span>
+                      )}
+                    </div>
+                    {item.title && (
+                      <p class="working-list__title">{item.title}</p>
+                    )}
+                    <p class="working-list__text">{item.text}</p>
+                    <StatusTag
+                      variant="since"
+                      date={item.since}
+                      class="working-list__tag"
+                    />
+                  </CardTag>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )
+    }
+  </div>
+</section>
 
 <style lang="scss">
   @use "./WorkingList.scss";

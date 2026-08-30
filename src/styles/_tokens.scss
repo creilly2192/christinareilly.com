@@ -1,36 +1,37 @@
 /* ===== CSS TOKENS ===== */
 :root {
-  /* Ledger design system — light palette (public/designs/direction-a.jsx A_TOK).
+   /* Ledger design system — light palette (public/designs/direction-a.jsx A_TOK).
      Dark mode (A_TOK_DARK) isn't scoped for this pass — see CLAUDE.md. */
-  --color-paper: #fefaf8;
-  --color-paper-deep: rgba(102, 152, 204, 0.2);
-  --color-ink: #241a10;
-  --color-ink-soft: #5c4a3d;
-  --color-ink-mute: #7a6a60;
-  --color-rule: #eae0da;
+   --color-paper: #fefaf8;
+   --color-white: #ffffff;
+   --color-paper-deep: rgba(102, 152, 204, 0.2);
+   --color-ink: #241a10;
+   --color-ink-soft: #5c4a3d;
+   --color-ink-mute: #7a6a60;
+   --color-rule: #eae0da;
 
-  /* Contrast fix vs. the mockup: pure blush is ~3:1 on paper, failing 4.5:1 AA
+   /* Contrast fix vs. the mockup: pure blush is ~3:1 on paper, failing 4.5:1 AA
      for normal text. accentText/link-hover are the AA-safe pair real text
      links use; --color-link (pure blush) is reserved for icons, tags,
      borders, fills, and large type (>=24px), never link text. */
-  --color-link: #e36888;
-  --color-link-hover: #c14f6c;
-  --color-accent-text: #b8456a;
+   --color-link: #e36888;
+   --color-link-hover: #c14f6c;
+   --color-accent-text: #b8456a;
 
-  /* Decorative four-color rotation — Working On tiles / book covers only,
+   /* Decorative four-color rotation — Working On tiles / book covers only,
      never brand or link color. */
-  --color-card-blush-bg: #e36888;
-  --color-card-blush-text: #fff6f2;
-  --color-card-tangerine-bg: #f08c21;
-  --color-card-tangerine-text: #341a00;
-  --color-card-sea-bg: #6698cc;
-  --color-card-sea-text: #f4f9ff;
-  --color-card-matcha-bg: #b4b534;
-  --color-card-matcha-text: #2a2b00;
+   --color-card-blush-bg: #e36888;
+   --color-card-blush-text: #fff6f2;
+   --color-card-tangerine-bg: #f08c21;
+   --color-card-tangerine-text: #341a00;
+   --color-card-sea-bg: #6698cc;
+   --color-card-sea-text: #f4f9ff;
+   --color-card-matcha-bg: #b4b534;
+   --color-card-matcha-text: #2a2b00;
 
-  --font-heading: "Jost", ui-sans-serif, sans-serif;
-  --font-body: "Instrument Sans", ui-sans-serif, sans-serif;
+   --font-heading: "Jost", ui-sans-serif, sans-serif;
+   --font-body: "Instrument Sans", ui-sans-serif, sans-serif;
 
-  --leading-body: 1.6;
-  --leading-heading: 1.25;
+   --leading-body: 1.6;
+   --leading-heading: 1.25;
 }

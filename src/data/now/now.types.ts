@@ -1,3 +1,5 @@
+import type { IconName } from "../../components/Icon/Icon.astro";
+
 export type ReadingStatus = "finished" | "current";
 
 type ReadingItemBase = {
@@ -28,6 +30,8 @@ export type ListeningItem = {
 export type WorkingItem = {
   text: string;
   since: string; // display string for the StatusTag, e.g. "2022" or "jul 22" — not ISO
-  link?: string;
-  linkText?: string;
+  title?: string; // project name shown above the body text (project cards only)
+  link?: string; // whole-card external link — project cards only, opens in a new tab
+  icon?: IconName; // shown via IconBadge — the two "life" cards (heart, briefcase)
+  isProject?: boolean; // side-project cards get a "PROJECT" badge + external-link arrow
 };

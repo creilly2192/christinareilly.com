@@ -21,21 +21,13 @@ const {
 
 {
   shape === "sticker" ? (
-    <span class="icon-badge icon-badge--sticker" style={{ background: bg }}>
-      <Icon name={name} size={22} color={fg} strokeWidth={2.1} />
+    <span class="icon-badge icon-badge--sticker">
+      <Icon name={name} size={14} color={fg} strokeWidth={2.1} />
     </span>
   ) : (
     <span class="icon-badge icon-badge--folder">
-      <span
-        class="icon-badge__tab"
-        style={{ background: bg }}
-        aria-hidden="true"
-      />
-      <span
-        class="icon-badge__body"
-        style={{ background: bg }}
-        aria-hidden="true"
-      />
+      <span class="icon-badge__tab" aria-hidden="true" />
+      <span class="icon-badge__body" aria-hidden="true" />
       <span class="icon-badge__icon">
         <Icon name={name} size={18} color={fg} strokeWidth={2.2} />
       </span>

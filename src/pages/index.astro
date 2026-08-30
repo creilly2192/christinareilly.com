@@ -1,10 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero/Hero.astro";
+import WorkingList from "../components/WorkingList/WorkingList.astro";
+import { working } from "../data/now/working";
 import Now from "../components/Now/Now.astro";
 ---
 
 <BaseLayout>
   <Hero />
+  <WorkingList items={working} />
   <Now />
 </BaseLayout>
