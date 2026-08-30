@@ -5,8 +5,7 @@ header {
   padding: 1rem 2rem 1rem 2rem;
 
   @media only screen and (max-width: $desktop) {
-    padding: .5rem 0;
-
+    padding: 0.5rem 0;
   }
 }
 
@@ -31,7 +30,6 @@ header {
 }
 
 .header__nav {
-
   .header__nav-list {
     list-style: none;
     padding: 0;
@@ -41,6 +39,28 @@ header {
       .header__nav-list-link {
         text-decoration: none;
         color: var(--color-ink-soft);
+        position: relative;
+        transition: color 0.3s ease;
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: var(--color-card-sea-bg);
+          transition: width 0.3s ease;
+        }
+
+        &:hover::before,
+        &.active::before {
+          width: 100%;
+        }
+
+        &:hover {
+          color: var(--color-link-hover);
+        }
       }
     }
   }

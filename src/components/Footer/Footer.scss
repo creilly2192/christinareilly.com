@@ -1,5 +1,5 @@
 footer {
-  padding: 6rem 0 2rem 0;
+  padding: 2rem 0 2rem 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -22,10 +22,11 @@ footer {
 
 .footer__links a {
   color: var(--color-ink-soft);
+  text-decoration: none;
 }
 
 .footer__links a:hover {
-  color: var(--color-accent-text);
+  color: var(--color-link-hover);
 }
 
 @media screen and (max-width: 768px) {
