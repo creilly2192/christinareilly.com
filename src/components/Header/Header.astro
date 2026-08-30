@@ -1,11 +1,16 @@
 <header>
-  <div class="container">
-    <nav>
-      <span class="site-name">Christina Reilly.</span>
+  <div class="header__container container">
+    <a class="site-name__link" href="/">cr<span>.</span></a>
+    <nav class="header__nav">
+      <ul class="header__nav-list">
+        <li class="header__nav-list-item">
+          <a class="header__nav-list-link" href="/about">reading log</a>
+        </li>
+      </ul>
     </nav>
   </div>
-</header>
 
-<style lang="scss">
-  @use "./Header.scss";
-</style>
+  <style lang="scss">
+    @use "./Header.scss" as *;
+  </style>
+</header>

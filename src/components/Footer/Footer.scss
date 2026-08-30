@@ -21,11 +21,11 @@ footer {
 }
 
 .footer__links a {
-  color: var(--color-muted);
+  color: var(--color-ink-soft);
 }
 
 .footer__links a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 @media screen and (max-width: 768px) {

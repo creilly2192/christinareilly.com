@@ -1,0 +1,22 @@
+---
+// Ledger design system's changelog-style metadata tag — "since [date]" on
+// Working On / Listening cards, "returned [date]" on finished reads. No
+// checked-out variant: currently-reading books show no date (see CLAUDE.md
+// Decisions — Christina's call, a deliberate deviation from the mockup).
+type Props = {
+  variant: "since" | "returned";
+  date: string;
+  label?: string; // override the displayed word, e.g. "on repeat since"
+};
+
+const { variant, date, label } = Astro.props as Props;
+---
+
+<span class:list={["status-tag", `status-tag--${variant}`]}>
+  {label ?? variant}
+  {date}
+</span>
+
+<style lang="scss">
+  @use "./StatusTag.scss";
+</style>

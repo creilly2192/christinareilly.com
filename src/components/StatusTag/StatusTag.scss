@@ -1,0 +1,22 @@
+/* Ledger status tag — changelog-style metadata, Instrument Sans, not mono. */
+.status-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  /* 14px — the mockup's 11px read too small; matches the smallest text size
+     already used elsewhere on the site (ReadingList/ListeningList meta text). */
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  /* text-transform (not uppercased source text) keeps the underlying words
+     lowercase, so screen readers read them normally instead of spelling
+     out letters, which some do for genuinely all-caps text. */
+  text-transform: uppercase;
+}
+
+.status-tag--since {
+  color: var(--color-ink-soft);
+}
+
+.status-tag--returned {
+  color: var(--color-ink-mute);
+}

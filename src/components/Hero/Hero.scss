@@ -1,34 +1,127 @@
-/* Hero Main component styles */
+/* Hero — retro browser-window chrome. See public/designs/direction-a.jsx
+   (lines ~231-340) for the reference layout: bordered card, hard-offset
+   shadow, colored title bar with three decorative dots. No traffic-light
+   motion and no blinking cursor for this pass — see CLAUDE.md Decisions. */
+@use "../../styles/functions" as *;
+@use "../../styles/_breakpoints" as *;
+
 .hero-main {
-  padding: 6rem 0;
-  text-align: left;
+   padding-bottom: rv(3rem, 6.25rem);
+}
+
+.hero-main__window {
+   position: relative;
+   border-radius: 0.88rem;
+   box-shadow: 10px 10px 0px rgb(36, 26, 16);
+   border: 3px solid var(--color-ink);
+   overflow: hidden;
+}
+
+.hero-main__title-bar {
+   background-color: var(--color-card-blush-bg);
+   padding: 0.875rem 1.125rem;
+   border-bottom: 3px solid var(--color-ink);
+   display: flex;
+   gap: 0.5rem;
+}
+
+.hero-main__dot {
+   width: 0.875rem;
+   height: 0.875rem;
+   border-radius: 50%;
+   display: inline-block;
+   border: 0.125rem solid var(--color-ink);
+}
+
+.hero-main__dot--a {
+   background-color: var(--color-card-matcha-bg);
+}
+
+.hero-main__dot--b {
+   background-color: var(--color-card-tangerine-bg);
+}
+
+.hero-main__dot--c {
+   background-color: var(--color-card-sea-bg);
+}
+
+.hero-main__content {
+   padding: rv(1.25rem, 8.25rem) rv(2rem, 5rem) rv(1.25rem, 8.25rem) rv(1rem, 5rem);
 }
 
 .hero-main__title {
-  font-size: 4.5rem;
-  margin-bottom: 0;
-  font-weight: 900;
-  text-wrap: balance;
+   font-size: clamp(2.5rem, 8.5vw, 6.25rem);
+   line-height: 1;
+}
+
+.hero-main__accent {
+   position: relative;
+   display: inline-flex;
+
+   &:hover {
+      .hero-main__accent-letter {
+         animation: a-web-bounce 0.7s ease;
+
+         &--w {
+            animation-delay: 0s;
+            color: var(--color-card-blush-bg);
+         }
+
+         &--e {
+            animation-delay: 0.08s;
+            color: var(--color-card-tangerine-bg);
+         }
+
+         &--b {
+            animation-delay: 0.16s;
+            color: var(--color-card-sea-bg);
+         }
+      }
+   }
+
+   .hero-main__accent-letter {
+      display: inline-block;
+      font-style: normal;
+      font-weight: inherit;
+      will-change: transform;
+      transition:
+         transform 0.7s ease-in-out,
+         color 0.2s ease-in-out;
+
+      &--w {
+         animation-delay: 0s;
+      }
+
+      &--e {
+         animation-delay: 0.08s;
+      }
+
+      &--b {
+         animation-delay: 0.16s;
+      }
+   }
+
+   @keyframes a-web-bounce {
+
+      0%,
+      100% {
+         transform: translateY(0) rotate(0);
+      }
+
+      30% {
+         transform: translateY(-18px) rotate(-10deg);
+      }
+
+      60% {
+         transform: translateY(5px) rotate(6deg);
+      }
+   }
 }
 
 .hero-main__deck {
-  font-size: 1.875rem;
-  color: var(--color-muted);
-  font-family: var(--font-sans);
-  margin-top: 0.5rem;
-  text-wrap: balance;
-}
-
-@media screen and (max-width: 768px) {
-  .hero-main {
-    padding: 3rem 0;
-  }
-
-  .hero-main__title {
-    font-size: 3.5rem;
-  }
-
-  .hero-main__deck {
-    font-size: 1.25rem;
-  }
+   font-size: clamp(1rem, 2vw, 1.5rem);
+   line-height: 1.5;
+   margin-top: 1rem;
+   max-width: 40ch;
+   color: var(--color-ink-soft);
 }

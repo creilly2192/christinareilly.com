@@ -2,8 +2,10 @@
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
-  font-weight: 500;
+  font-family: var(--font-heading);
+  // 600 rather than the old 500 — it's the only Jost weight imported (see
+  // BaseLayout.astro), and matches the ledger design system's heading spec.
+  font-weight: 600;
   line-height: var(--leading-heading);
   margin: 0;
 }
@@ -25,7 +27,7 @@ p {
 
 /* Book titles, later essay titles */
 em {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-style: italic;
 }
 
@@ -38,7 +40,7 @@ select {
 
 /* ===== LINKS & FOCUS ===== */
 a {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
@@ -48,11 +50,11 @@ a {
 }
 
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-link-hover);
 }
 
 a:focus-visible {
-  outline: 2px solid var(--color-accent-hover);
+  outline: 2px solid var(--color-link-hover);
   outline-offset: 3px;
   border-radius: 2px;
 }

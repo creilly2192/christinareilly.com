@@ -1,21 +1,35 @@
 /* ===== CSS TOKENS ===== */
 :root {
-  --color-bg: #fafaf8;
-  --color-text: #0c0a0a;
-  --color-muted: #5a5c63;
-  --color-accent: #b33d98;
-  --color-accent-hover: #146a7a;
-  --color-dramatic: #051c20;
-  // Placeholder — light tint of --color-accent, used as the "Now" section
-  // background. Referenced but never defined in the old global.css; eyeball
-  // it and adjust if it doesn't read right.
-  --color-purple-muted: #f4ecf3;
+  /* Ledger design system — light palette (public/designs/direction-a.jsx A_TOK).
+     Dark mode (A_TOK_DARK) isn't scoped for this pass — see CLAUDE.md. */
+  --color-paper: #fefaf8;
+  --color-paper-deep: rgba(102, 152, 204, 0.2);
+  --color-ink: #241a10;
+  --color-ink-soft: #5c4a3d;
+  --color-ink-mute: #7a6a60;
+  --color-rule: #eae0da;
 
-  --border: rgba(17, 17, 17, 0.1);
+  /* Contrast fix vs. the mockup: pure blush is ~3:1 on paper, failing 4.5:1 AA
+     for normal text. accentText/link-hover are the AA-safe pair real text
+     links use; --color-link (pure blush) is reserved for icons, tags,
+     borders, fills, and large type (>=24px), never link text. */
+  --color-link: #e36888;
+  --color-link-hover: #c14f6c;
+  --color-accent-text: #b8456a;
 
-  --font-serif: "Crimson Pro", ui-serif, Georgia, "Times New Roman", serif;
-  --font-sans: "Inter", ui-sans-serif, sans-serif;
-  --font-body: "Crimson Pro", Georgia, serif;
+  /* Decorative four-color rotation — Working On tiles / book covers only,
+     never brand or link color. */
+  --color-card-blush-bg: #e36888;
+  --color-card-blush-text: #fff6f2;
+  --color-card-tangerine-bg: #f08c21;
+  --color-card-tangerine-text: #341a00;
+  --color-card-sea-bg: #6698cc;
+  --color-card-sea-text: #f4f9ff;
+  --color-card-matcha-bg: #b4b534;
+  --color-card-matcha-text: #2a2b00;
+
+  --font-heading: "Jost", ui-sans-serif, sans-serif;
+  --font-body: "Instrument Sans", ui-sans-serif, sans-serif;
 
   --leading-body: 1.6;
   --leading-heading: 1.25;

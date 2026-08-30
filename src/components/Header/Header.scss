@@ -1,14 +1,47 @@
+@use "../../styles/_breakpoints" as *;
+
 /* Header component styles */
 header {
-  padding: 2rem 0;
+  padding: 1rem 2rem 1rem 2rem;
+
+  @media only screen and (max-width: $desktop) {
+    padding: .5rem 0;
+
+  }
 }
 
-nav {
-  font-family: var(--font-serif);
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-name__link {
+  font-family: var(--font-heading);
   font-weight: 400;
   letter-spacing: 0.02em;
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: var(--color-ink);
+
+  span {
+    color: var(--color-card-matcha-bg);
+  }
 }
 
-.site-name {
-  display: inline-block;
+.header__nav {
+
+  .header__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .header__nav-list-item {
+      .header__nav-list-link {
+        text-decoration: none;
+        color: var(--color-ink-soft);
+      }
+    }
+  }
 }

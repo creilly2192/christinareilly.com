@@ -48,12 +48,12 @@
 }
 
 .reading-list__author {
-  color: var(--color-muted);
+  color: var(--color-ink-soft);
   font-size: 0.875rem;
 }
 
 .reading-list__note {
-  color: var(--color-muted);
+  color: var(--color-ink-soft);
   font-size: 0.875rem;
   margin-top: 0.25rem;
   text-wrap: balance;
@@ -75,6 +75,6 @@
   left: 0;
   right: 0;
   height: 5.625rem;
-  background: linear-gradient(to bottom, transparent, var(--color-bg));
+  background: linear-gradient(to bottom, transparent, var(--color-paper));
   pointer-events: none;
 }
