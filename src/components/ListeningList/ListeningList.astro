@@ -1,39 +1,272 @@
 ---
 import type { ListeningItem } from "../../data/now/now.types";
+import Icon from "../Icon/Icon.astro";
 
 type Props = { items?: ListeningItem[] };
 const { items = [] } = Astro.props as Props;
 ---
 
 <div class="section-now__grid-item">
-  <h3>Listening</h3>
+  <h3 class="section-now__subheading">
+    <Icon name="headphones" size={14} />Currently Listening
+  </h3>
   {
     items.length === 0 ? (
       <p class="muted">Nothing listed yet.</p>
     ) : (
-      <ul class="listening-list">
+      <div class="listening-list">
         {items.map((item) => (
-          <li class="listening-list__item">
-            <div class="listening-list__content">
-              <strong>{item.title}</strong> by {item.artist}
-              {item.note ? (
-                <p class="listening-list__note">
-                  {item.note}
-                  {item.link ? (
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Listen here
-                    </a>
-                  ) : null}
-                </p>
-              ) : null}
+          <div class="listening-list__content">
+            <div class="listening-list__meta">
+              <strong class="listening-list__title">{item.title}</strong>
+              <span>by {item.artist} </span>
             </div>
-          </li>
+            <p class="listening-list__note">
+              <a
+                href="https://www.albumlog.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                albumlog,
+              </a>{" "}
+              my project ranking the 500 greatest albums of all time
+            </p>
+          </div>
         ))}
-      </ul>
+
+        <div class="listening-list__record">
+          <svg
+            viewBox="0 0 300 300"
+            width="220"
+            height="220"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {" "}
+            <defs>
+              {" "}
+              <radialGradient id="a-vinyl-disc" cx="50%" cy="40%" r="60%">
+                {" "}
+                <stop offset="0%" stop-color="#2a2330" />{" "}
+                <stop offset="55%" stop-color="#161118" />{" "}
+                <stop offset="100%" stop-color="#0a0709" />{" "}
+              </radialGradient>{" "}
+            </defs>{" "}
+            <circle cx="150" cy="150" r="148" fill="#1a141c" />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="148"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.22"
+              stroke-width="1"
+            />{" "}
+            <circle cx="150" cy="150" r="142" fill="url(#a-vinyl-disc)" />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="142"
+              fill="none"
+              stroke="#000"
+              stroke-opacity="0.5"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="136"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.32"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="129"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="122"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="115"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.32"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="108"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="101"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="94"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.32"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="87"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="80"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="73"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.32"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="66"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="59"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="52"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.32"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="45"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity="0.1"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="40"
+              fill="none"
+              stroke="#fff"
+              stroke-opacity="0.06"
+              stroke-width="2"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="34"
+              fill="#e36888"
+              fill-opacity="0.98"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="34"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.55"
+              stroke-width="1"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="28"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.25"
+              stroke-width="0.5"
+            />{" "}
+            <circle
+              cx="150"
+              cy="150"
+              r="14"
+              fill="none"
+              stroke="#e36888"
+              stroke-opacity="0.3"
+              stroke-width="0.5"
+            />{" "}
+            <text
+              x="150"
+              y="146"
+              text-anchor="middle"
+              font-family="Instrument Sans, sans-serif"
+              font-size="7"
+              fill="#fff6f2"
+              fill-opacity="0.9"
+              letter-spacing="1.2"
+            >
+              SIDE A
+            </text>{" "}
+            <text
+              x="150"
+              y="158"
+              text-anchor="middle"
+              font-family="Instrument Sans, sans-serif"
+              font-size="6"
+              fill="#fff6f2"
+              fill-opacity="0.65"
+              letter-spacing="0.8"
+            >
+              33⅓ RPM
+            </text>{" "}
+          </svg>
+        </div>
+      </div>
     )
   }
 </div>

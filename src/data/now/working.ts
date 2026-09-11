@@ -14,7 +14,7 @@ export const working: WorkingItem[] = [
   {
     title: "Trio.Reads",
     text: "Pulls from your RSS feeds and hands you three picks each morning.",
-    link: "https://example.com",
+    link: "https://trioreads.netlify.app/app",
     since: "aug 2026",
     isProject: true,
   },

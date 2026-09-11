@@ -5,6 +5,7 @@ export type ReadingStatus = "finished" | "current";
 type ReadingItemBase = {
   title: string;
   author?: string;
+  year_published?: number;
   note?: string; // one sentence max
   cover?: string;
   coverAlt?: string;
