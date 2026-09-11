@@ -3,6 +3,22 @@ import ReadingList from "../ReadingList/ReadingList.astro";
 import ListeningList from "../ListeningList/ListeningList.astro";
 import { reading } from "../../data/now/reading";
 import { listening } from "../../data/now/listening";
+import { getNowPlaying } from "../../lib/albumlog";
+
+const nowPlaying = await getNowPlaying();
+
+// AlbumLog's live "now playing" album overrides title/artist on the static
+// entry when the fetch succeeds at build time; since/note/link have no
+// equivalent in the API response, so they always stay hand-written. Falls
+// back to the static data entirely on fetch failure (fail-soft, see
+// lib/albumlog.ts).
+const listeningItems =
+  nowPlaying && listening[0]
+    ? [
+        { ...listening[0], title: nowPlaying.title, artist: nowPlaying.artist },
+        ...listening.slice(1),
+      ]
+    : listening;
 ---
 
 <section class="section section-now">
@@ -12,7 +28,7 @@ import { listening } from "../../data/now/listening";
 
     <div class="section-now__grid">
       <ReadingList items={reading} />
-      <ListeningList items={listening} />
+      <ListeningList items={listeningItems} />
     </div>
   </div>
 </section>

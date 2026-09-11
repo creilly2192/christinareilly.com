@@ -59,24 +59,12 @@
   position: relative;
   display: inline-flex;
 
+  // Hovering swaps each letter to a byte-for-byte duplicate keyframe name.
+  // Re-declaring the *same* animation-name on :hover wouldn't restart it —
+  // the computed value has to actually change for the animation to replay.
   &:hover {
     .hero-main__accent-letter {
-      animation: a-web-bounce 0.7s ease;
-
-      &--w {
-        animation-delay: 0s;
-        color: var(--color-card-blush-bg);
-      }
-
-      &--e {
-        animation-delay: 0.08s;
-        color: var(--color-card-tangerine-bg);
-      }
-
-      &--b {
-        animation-delay: 0.16s;
-        color: var(--color-card-sea-bg);
-      }
+      animation-name: a-web-bounce-replay;
     }
   }
 
@@ -85,24 +73,56 @@
     font-style: normal;
     font-weight: inherit;
     will-change: transform;
-    transition:
-      transform 0.7s ease-in-out,
-      color 0.2s ease-in-out;
+    // No animation-name until the page has actually painted (see the
+    // .js-loaded toggle below + the inline script in Hero.astro). An
+    // animation-delay alone counts down from navigation start, not from
+    // first paint — on a slow initial load the whole 0.7s bounce can
+    // already be over before anyone sees it, so it silently no-ops.
+    animation-name: none;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
 
     &--w {
       animation-delay: 0s;
+      color: var(--color-card-blush-bg);
     }
 
     &--e {
       animation-delay: 0.08s;
+      color: var(--color-card-tangerine-bg);
     }
 
     &--b {
       animation-delay: 0.16s;
+      color: var(--color-card-sea-bg);
     }
   }
 
+  // Flipped by the inline script in Hero.astro via a double
+  // requestAnimationFrame, which guarantees a real paint has already
+  // happened — so the animation timeline starts from a known-visible
+  // moment instead of from navigation start.
+  :global(html.js-loaded) & .hero-main__accent-letter {
+    animation-name: a-web-bounce;
+  }
+
   @keyframes a-web-bounce {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0);
+    }
+
+    30% {
+      transform: translateY(-18px) rotate(-10deg);
+    }
+
+    60% {
+      transform: translateY(5px) rotate(6deg);
+    }
+  }
+
+  @keyframes a-web-bounce-replay {
     0%,
     100% {
       transform: translateY(0) rotate(0);

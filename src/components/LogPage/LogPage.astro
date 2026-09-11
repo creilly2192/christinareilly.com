@@ -1,0 +1,109 @@
+---
+// Reusable "log page" layout — header + labeled sections of rows (cover,
+// title, meta, note, trailing status tag). Built for /reading-log; meant to
+// be reused by any future page with the same shape (e.g. a projects log) by
+// passing a differently-sourced `sections` array.
+//
+// Deliberately fully data-driven (no slots): a plain <style> block written
+// directly in a src/pages/*.astro file does not get compiled into any CSS
+// output in this project's Astro setup (confirmed via minimal repro — plain
+// CSS, SCSS, with/without @use, with/without other components present, all
+// silently produced zero output). Keeping the header/sections/rows markup
+// entirely inside this component's own template — not slotted in from a
+// page file — sidesteps that entirely and matches how every other styled
+// piece of this site is already built.
+import StatusTag from "../StatusTag/StatusTag.astro";
+
+const base = import.meta.env.BASE_URL;
+
+type LogRow = {
+  href?: string;
+  coverSrc?: string;
+  coverAlt?: string;
+  title: string;
+  author?: string;
+  year?: number;
+  note?: string;
+  status: {
+    variant: "since" | "returned" | "reading";
+    date?: string;
+    label?: string;
+  };
+};
+
+type LogSection = {
+  label: string;
+  items: LogRow[];
+};
+
+type Props = {
+  title: string;
+  deck: string;
+  sections: LogSection[];
+};
+
+const { title, deck, sections } = Astro.props as Props;
+---
+
+<section class="section log-page">
+  <div class="container">
+    <div class="log-page__header">
+      <h1 class="log-page__title">
+        {title}<span class="color-blush">.</span>
+      </h1>
+      <p class="log-page__deck">{deck}</p>
+    </div>
+
+    {
+      sections.map((section) => (
+        <div class="log-page__section">
+          <h2 class="log-page__section-label">{section.label}</h2>
+          <ul class="log-page__list">
+            {section.items.map((item) => (
+              <li class="log-page__row">
+                {item.coverSrc && (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    <figure class="log-page__cover">
+                      <img
+                        src={`${base}${item.coverSrc}`}
+                        alt={item.coverAlt ?? `Cover of ${item.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        width="175"
+                        height="230"
+                      />
+                    </figure>
+                  </a>
+                )}
+                <div class="log-page__content">
+                  <p class="log-page__title-text">
+                    <strong>{item.title}</strong>
+                  </p>
+                  <div class="log-page__meta">
+                    {item.author && (
+                      <span class="log-page__author">{item.author}</span>
+                    )}
+                    {item.year && (
+                      <span class="log-page__year">· {item.year}</span>
+                    )}
+                  </div>
+                  {item.note && <p class="log-page__note">{item.note}</p>}
+                </div>
+                <StatusTag
+                  variant={item.status.variant}
+                  date={item.status.date}
+                  label={item.status.label}
+                  class="log-page__status"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style lang="scss">
+  @use "./LogPage.scss";
+</style>

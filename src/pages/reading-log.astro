@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LogPage from "../components/LogPage/LogPage.astro";
+import { reading } from "../data/now/reading";
+
+const currentReads = reading.filter((item) => item.status === "current");
+const pastReads = reading.filter((item) => item.status === "finished");
+
+const sections = [
+  {
+    label: "Currently Reading",
+    items: currentReads.map((item) => ({
+      href: item.goodreadsLink,
+      coverSrc: item.cover ? `covers/${item.cover}` : undefined,
+      coverAlt: item.coverAlt,
+      title: item.title,
+      author: item.author,
+      year: item.year_published,
+      note: item.note,
+      status: { variant: "reading" as const, label: "in progress" },
+    })),
+  },
+  {
+    label: "Past Reads",
+    items: pastReads.map((item) => ({
+      href: item.goodreadsLink,
+      coverSrc: item.cover ? `covers/${item.cover}` : undefined,
+      coverAlt: item.coverAlt,
+      title: item.title,
+      author: item.author,
+      year: item.year_published,
+      note: item.note,
+      status: { variant: "returned" as const, date: item.returned },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="Reading Log — Christina Reilly"
+  description="Every book I've picked up and finished, oldest habit I've kept the longest."
+>
+  <LogPage
+    title="Reading Log"
+    deck="Every book I’ve picked up and finished, oldest habit I’ve kept the longest."
+    sections={sections}
+  />
+</BaseLayout>

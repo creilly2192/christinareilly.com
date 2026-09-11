@@ -9,12 +9,15 @@ import "@fontsource/instrument-sans/600.css";
 
 import { SEO } from "astro-seo";
 
-// interface Props {
-//   title: string;
-//   description?: string;
-// }
+type Props = {
+  title?: string;
+  description?: string;
+};
 
-// const { title, description } = Astro.props;
+const {
+  title = "Christina Reilly Portfolio",
+  description = "Senior web developer.",
+} = Astro.props as Props;
 
 import "../styles/global.scss";
 
@@ -25,10 +28,7 @@ import Footer from "../components/Footer/Footer.astro";
 <!doctype html>
 <html lang="en">
   <head>
-    <SEO
-      title="Christina Reilly Portfolio"
-      description="Senior web developer."
-    />
+    <SEO title={title} description={description} />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
   </head>

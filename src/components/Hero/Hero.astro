@@ -30,6 +30,19 @@
   </div>
 </section>
 
+<script is:inline>
+  // Confirms a real paint has happened before starting the "web" entrance
+  // bounce (see .js-loaded in Hero.scss) — an animation-delay alone counts
+  // down from navigation start, so on a slow first load the animation can
+  // silently finish before the page is ever visible. Double rAF is the
+  // standard way to wait for "at least one frame has been painted."
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.add("js-loaded");
+    });
+  });
+</script>
+
 <style lang="scss">
   @use "./Hero.scss";
 </style>
