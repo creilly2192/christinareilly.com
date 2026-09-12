@@ -1,44 +1,120 @@
+@use "../../styles/_breakpoints" as *;
+
 .log-page__header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+    align-items: end;
+    margin-bottom: 6.5rem;
+
+    @media only screen and (max-width: $desktop) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 2rem;
+    }
 }
 
 .log-page__title {
+    font-size: clamp(2.5rem, 8.5vw, 4.75rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1;
 }
 
 .log-page__deck {
+    font-size: 1.0625rem;
+    color: var(--color-ink-soft);
+    max-width: 32.5rem;
+    text-wrap: pretty;
 }
 
-.log-page__section {
-}
+.log-page__section {}
 
 .log-page__section-label {
+    font-size: .875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-mute);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    font-family: var(--font-body);
+    position: relative;
+    padding-left: 1.25rem;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -0.0625rem;
+        height: .0625rem;
+        width: .875rem;
+        background-color: var(--color-ink-mute);
+    }
 }
 
 .log-page__list {
+    padding-bottom: 1.5rem;
+    padding-left: 0;
+    list-style: none;
 }
 
 .log-page__row {
+    padding: 2rem 0px;
+    border-top: 1px dashed rgb(234, 224, 218);
+    display: grid;
+    grid-template-columns: 5.75rem 1fr auto;
+    column-gap: 1.75rem;
+    align-items: start;
+
+    @media only screen and (max-width: $desktop) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 2rem;
+    }
 }
 
 .log-page__cover {
+    margin: 0;
+
+    .log-page__cover-img {
+        width: 100%;
+        height: 100%;
+
+        @media only screen and (max-width: $desktop) {
+            height: 12.5rem;
+        }
+    }
 }
 
-.log-page__content {
-}
+.log-page__content {}
 
 .log-page__title-text {
+    font-size: 1.625rem;
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    max-width: 37.5rem;
 }
 
 .log-page__meta {
+    color: var(--color-ink-soft);
+    margin-top: .25rem;
 }
 
-.log-page__author {
-}
+.log-page__author {}
 
-.log-page__year {
-}
+.log-page__year {}
 
 .log-page__note {
+    max-width: 31.25rem;
+    color: var(--color-ink-mute);
+    margin-top: .875rem;
 }
 
-.log-page__status {
-}
+.log-page__status {}

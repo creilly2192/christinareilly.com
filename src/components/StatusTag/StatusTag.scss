@@ -7,7 +7,8 @@
   font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  text-transform: lowercase;
+  color: var(--color-ink-mute);
   margin-top: 0.5rem;
 }
 
@@ -15,5 +16,4 @@
   color: var(--color-ink-mute);
 }
 
-.status-tag--reading {
-}
+.status-tag--reading {}
