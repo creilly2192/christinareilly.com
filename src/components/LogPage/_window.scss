@@ -1,0 +1,99 @@
+@use "../../styles/_breakpoints" as *;
+@use "../../styles/motion" as *;
+
+/* Projects-log-only styles (coverStyle="window"). Loaded after LogPage.scss
+   from LogPage.astro's <style> block — not via @use inside LogPage.scss,
+   since Sass requires @use at the top of a file, which would put these
+   rules *before* the book-cover rules they need to override. */
+
+/* Mini retro browser window around project screenshots — a scaled-down
+   copy of the Hero's chrome (.hero-main__window in Hero.scss): same ink
+   border, hard-offset shadow, blush title bar, and three colored dots. */
+.log-page__list--window .log-page__row {
+  // Wider first column than the book-cover default — screenshots are landscape.
+  grid-template-columns: 15.5rem 1fr auto;
+
+  // Tablet: LogPage.scss stacks every row below $desktop, which left the
+  // screenshot, text, and status tag in one long column. Keep the screenshot
+  // beside the text instead, with the status tag dropped under the text.
+  @media only screen and (max-width: $desktop) {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    row-gap: 1rem;
+
+    .log-page__cover-link {
+      grid-row: span 2;
+    }
+
+    .log-page__content {
+      align-self: start;
+    }
+
+    .log-page__status {
+      grid-column: 2;
+    }
+  }
+
+  // Phone: back to LogPage.scss's single stacked column.
+  @media only screen and (max-width: $mobile) {
+    display: flex;
+  }
+}
+
+.log-page__cover--window {
+  border-radius: 0.5rem;
+  border: 2px solid var(--color-ink);
+  box-shadow: 6px 6px 0px rgb(36, 26, 16);
+  overflow: hidden;
+  @include motion-safe {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: rotate(-3deg);
+    }
+  }
+
+  @media only screen and (max-width: $desktop) {
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  // Overrides the book-cover sizing above: keep the screenshot's own
+  // aspect ratio, and block-level so no inline gap shows under it.
+  .log-page__cover-img {
+    display: block;
+    height: auto;
+
+    @media only screen and (max-width: $desktop) {
+      height: auto;
+    }
+  }
+}
+
+.log-page__window-bar {
+  background-color: var(--color-card-blush-bg);
+  padding: 0.5rem 0.625rem;
+  border-bottom: 2px solid var(--color-ink);
+  display: flex;
+  gap: 0.3125rem;
+}
+
+.log-page__window-dot {
+  width: 0.5625rem;
+  height: 0.5625rem;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid var(--color-ink);
+}
+
+.log-page__window-dot--a {
+  background-color: var(--color-card-matcha-bg);
+}
+
+.log-page__window-dot--b {
+  background-color: var(--color-card-tangerine-bg);
+}
+
+.log-page__window-dot--c {
+  background-color: var(--color-card-sea-bg);
+}

@@ -2,24 +2,24 @@ import type { ReadingItem } from "./now.types";
 
 export const reading: ReadingItem[] = [
   {
-    title: "The Grapes of Wrath",
-    author: "John Steinbeck",
+    title: "The Night Circus",
+    author: "Erin Morgenstern",
     status: "current",
-    year_published: 1939,
-    note: "A classic novel about the struggles of a family during the Great Depression, highlighting themes of poverty, injustice, and resilience.",
-    cover: "grapes-of-wrath-gr.jpg",
+    year_published: 2011,
+    note: "A magical novel about a competition between two young illusionists.",
+    cover: "the-night-circus-gr.webp",
     goodreadsLink:
-      "https://www.goodreads.com/book/show/18114322-the-grapes-of-wrath",
+      "https://www.goodreads.com/en/book/show/9361589-the-night-circus",
   },
   {
-    title:
-      "Yuppies: The Bankers, Lawyers, Joggers, and Gourmands Who Conquered New York",
-    author: "Dylan Gottlieb",
+    title: "The House of Mirth",
+    author: "Edith Wharton",
     status: "current",
-    year_published: 2026,
-    note: "The rise of Wall Street and the cultural shift of a demographic.",
-    cover: "yuppies-gr.webp",
-    goodreadsLink: "https://www.goodreads.com/en/book/show/239615512-yuppies",
+    year_published: 1905,
+    note: "A novel about the life of a young woman in the upper class of New York society.",
+    cover: "house-of-mirth-gr.webp",
+    goodreadsLink:
+      "https://www.goodreads.com/book/show/17728.The_House_of_Mirth",
   },
   {
     title: "Into The Blue",

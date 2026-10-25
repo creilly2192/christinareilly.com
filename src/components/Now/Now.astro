@@ -8,7 +8,7 @@ import { getNowPlaying } from "../../lib/albumlog";
 const nowPlaying = await getNowPlaying();
 
 // AlbumLog's live "now playing" album overrides title/artist on the static
-// entry when the fetch succeeds at build time; since/note/link have no
+// entry when the fetch succeeds at build time; note/link have no
 // equivalent in the API response, so they always stay hand-written. Falls
 // back to the static data entirely on fetch failure (fail-soft, see
 // lib/albumlog.ts).

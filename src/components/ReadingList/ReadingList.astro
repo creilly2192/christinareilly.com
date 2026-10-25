@@ -39,7 +39,7 @@ const currentReads = items.filter((i) => i.status === "current");
                           <figure class="reading-list__cover">
                             <img
                               src={`${base}covers/${item.cover}`}
-                              alt={`Cover of ${item.title}`}
+                              alt={item.coverAlt ?? `Cover of ${item.title}`}
                               loading="lazy"
                               decoding="async"
                               width="72"
@@ -71,7 +71,7 @@ const currentReads = items.filter((i) => i.status === "current");
                 ))}
               </ul>
 
-              <a href="" class="reading-list__view-all">
+              <a href="/reading-log" class="reading-list__view-all">
                 view full reading log{" "}
               </a>
             </>

@@ -1,13 +1,14 @@
 ---
 // Ledger design system's changelog-style metadata tag — "since [date]" on
-// Working On / Listening cards, "returned [date]" on finished reads,
-// "reading" for the reading-log's dateless "in progress" tag (no date on
-// this variant — see CLAUDE.md Decisions: currently-reading books never
-// show a checked-out date, a deliberate deviation from the mockup).
+// Working On cards, "returned [date]" on finished reads,
+// "ongoing" for dateless in-progress tags — the reading log's "in progress"
+// (via `label`) and the projects log's "ongoing" (no date on this variant —
+// see CLAUDE.md Decisions: currently-reading books never show a checked-out
+// date, a deliberate deviation from the mockup).
 type Props = {
-  variant: "since" | "returned" | "reading";
+  variant: "since" | "returned" | "ongoing";
   date?: string;
-  label?: string; // override the displayed word, e.g. "on repeat since", "in progress"
+  label?: string; // override the displayed word, e.g. "in progress"
   class?: string; // Astro does NOT auto-forward this — must be read + applied explicitly
 };
 

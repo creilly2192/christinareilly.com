@@ -1,3 +1,5 @@
+@use "./motion" as *;
+
 /* ===== BASE RESET ===== */
 *,
 *::before,
@@ -6,9 +8,12 @@
 }
 
 html {
+  @include motion-safe {
+    scroll-behavior: smooth;
+  }
+
   background-color: var(--color-paper);
   color: var(--color-ink);
-  scroll-behavior: smooth;
 }
 
 body {

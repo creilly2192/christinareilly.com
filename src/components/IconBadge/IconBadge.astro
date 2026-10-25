@@ -6,14 +6,12 @@ import Icon, { type IconName } from "../Icon/Icon.astro";
 
 type Props = {
   name: IconName;
-  bg?: string;
   fg?: string;
   shape?: "folder" | "sticker";
 };
 
 const {
   name,
-  bg = "var(--color-link)",
   fg = "var(--color-ink)",
   shape = "folder",
 } = Astro.props as Props;

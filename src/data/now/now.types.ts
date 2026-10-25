@@ -21,7 +21,6 @@ export type ReadingItem =
 export type ListeningItem = {
   title: string;
   artist: string;
-  since: string; // display date the current album has been "on repeat" — ledger's SINCE tag
   note?: string;
   link?: string;
 };

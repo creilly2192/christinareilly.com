@@ -4,6 +4,7 @@
    motion and no blinking cursor for this pass — see CLAUDE.md Decisions. */
 @use "../../styles/functions" as *;
 @use "../../styles/_breakpoints" as *;
+@use "../../styles/motion" as *;
 
 .hero-main {
   padding-bottom: rv(3rem, 6.25rem);
@@ -62,9 +63,11 @@
   // Hovering swaps each letter to a byte-for-byte duplicate keyframe name.
   // Re-declaring the *same* animation-name on :hover wouldn't restart it —
   // the computed value has to actually change for the animation to replay.
-  &:hover {
-    .hero-main__accent-letter {
-      animation-name: a-web-bounce-replay;
+  @include motion-safe {
+    &:hover {
+      .hero-main__accent-letter {
+        animation-name: a-web-bounce-replay;
+      }
     }
   }
 
@@ -103,8 +106,10 @@
   // requestAnimationFrame, which guarantees a real paint has already
   // happened — so the animation timeline starts from a known-visible
   // moment instead of from navigation start.
-  :global(html.js-loaded) & .hero-main__accent-letter {
-    animation-name: a-web-bounce;
+  @include motion-safe {
+    :global(html.js-loaded) & .hero-main__accent-letter {
+      animation-name: a-web-bounce;
+    }
   }
 
   @keyframes a-web-bounce {

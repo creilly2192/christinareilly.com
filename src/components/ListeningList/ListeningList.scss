@@ -1,10 +1,12 @@
+@use "../../styles/motion" as *;
+
 /* Listening styles */
 .listening-list {
   list-style: none;
   margin: 1.5rem 0 0 0;
   padding: 0;
   background: rgba(255, 128, 161, 0.09);
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   padding: 1.75rem 8.75rem 2rem 2rem;
   position: relative;
   overflow: hidden;
@@ -22,7 +24,7 @@
     font-size: 1.875rem;
     font-weight: 600;
     letter-spacing: -0.01em;
-    margin-top: .875rem;
+    margin-top: 0.875rem;
     line-height: 1.1;
     font-family: var(--font-heading);
   }
@@ -47,10 +49,13 @@
   opacity: 0.85;
   pointer-events: auto;
   transform: scale(1.015);
-  transition: transform 1.6s;
 
-  svg {
-    animation: 14s linear 0s infinite normal none running a-spin;
+  @include motion-safe {
+    transition: transform 1.6s;
+
+    svg {
+      animation: 14s linear 0s infinite normal none running a-spin;
+    }
   }
 }
 

@@ -13,6 +13,7 @@
 // page file — sidesteps that entirely and matches how every other styled
 // piece of this site is already built.
 import StatusTag from "../StatusTag/StatusTag.astro";
+import Icon from "../Icon/Icon.astro";
 
 const base = import.meta.env.BASE_URL;
 
@@ -20,12 +21,17 @@ type LogRow = {
   href?: string;
   coverSrc?: string;
   coverAlt?: string;
+  // Real pixel size of the image, so the browser reserves the right aspect
+  // ratio. Defaults to the book-cover size.
+  coverWidth?: number;
+  coverHeight?: number;
   title: string;
   author?: string;
   year?: number;
   note?: string;
+  since?: string; // optional "since [date]" line under the note (projects log)
   status: {
-    variant: "since" | "returned" | "reading";
+    variant: "since" | "returned" | "ongoing";
     date?: string;
     label?: string;
   };
@@ -40,9 +46,20 @@ type Props = {
   title: string;
   deck: string;
   sections: LogSection[];
+  // "book" = plain cover (reading log); "window" = screenshot inside the
+  // Hero's retro browser-window chrome (projects log).
+  coverStyle?: "book" | "window";
+  // Show an arrow next to the status tag on rows that link out.
+  linkArrow?: boolean;
 };
 
-const { title, deck, sections } = Astro.props as Props;
+const {
+  title,
+  deck,
+  sections,
+  coverStyle = "book",
+  linkArrow = false,
+} = Astro.props as Props;
 ---
 
 <section class="section log-page">
@@ -58,19 +75,36 @@ const { title, deck, sections } = Astro.props as Props;
       sections.map((section) => (
         <div class="log-page__section">
           <h2 class="log-page__section-label">{section.label}</h2>
-          <ul class="log-page__list">
+          <ul class:list={["log-page__list", `log-page__list--${coverStyle}`]}>
             {section.items.map((item) => (
               <li class="log-page__row">
                 {item.coverSrc && (
-                  <a href={item.href} target="_blank" rel="noopener noreferrer">
-                    <figure class="log-page__cover">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="log-page__cover-link"
+                  >
+                    <figure
+                      class:list={[
+                        "log-page__cover",
+                        `log-page__cover--${coverStyle}`,
+                      ]}
+                    >
+                      {coverStyle === "window" && (
+                        <div class="log-page__window-bar" aria-hidden="true">
+                          <span class="log-page__window-dot log-page__window-dot--a" />
+                          <span class="log-page__window-dot log-page__window-dot--b" />
+                          <span class="log-page__window-dot log-page__window-dot--c" />
+                        </div>
+                      )}
                       <img
                         src={`${base}${item.coverSrc}`}
                         alt={item.coverAlt ?? `Cover of ${item.title}`}
                         loading="lazy"
                         decoding="async"
-                        width="175"
-                        height="230"
+                        width={item.coverWidth ?? 175}
+                        height={item.coverHeight ?? 230}
                         class="log-page__cover-img"
                       />
                     </figure>
@@ -89,13 +123,24 @@ const { title, deck, sections } = Astro.props as Props;
                     )}
                   </div>
                   {item.note && <p class="log-page__note">{item.note}</p>}
+                  {item.since && (
+                    <div class="log-page__since">
+                      <StatusTag variant="since" date={item.since} />
+                    </div>
+                  )}
                 </div>
-                <StatusTag
-                  variant={item.status.variant}
-                  date={item.status.date}
-                  label={item.status.label}
-                  class="log-page__status"
-                />
+                <div class="log-page__status">
+                  <StatusTag
+                    variant={item.status.variant}
+                    date={item.status.date}
+                    label={item.status.label}
+                  />
+                  {linkArrow && item.href && (
+                    <span class="log-page__arrow">
+                      <Icon name="arrow-up-right" size={16} />
+                    </span>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
@@ -107,4 +152,5 @@ const { title, deck, sections } = Astro.props as Props;
 
 <style lang="scss">
   @use "./LogPage.scss";
+  @use "./window";
 </style>

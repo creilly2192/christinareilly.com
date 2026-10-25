@@ -1,3 +1,5 @@
+@use "../../styles/motion" as *;
+
 /* Reading styles */
 .reading-list {
   list-style: none;
@@ -38,15 +40,28 @@
       box-shadow:
         rgba(36, 26, 16, 0.2) 0px 8px 18px,
         rgba(36, 26, 16, 0.24) 0px 1px 2px;
-      transform: rotate(-3deg) translateY(-4px);
+
+      @include motion-safe {
+        transform: rotate(-3deg) translateY(-4px);
+      }
     }
   }
 
   &__cover {
     margin: 0;
-    transition:
-      box-shadow 0.2s ease-in-out,
-      transform 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
+
+    @include motion-safe {
+      transition:
+        box-shadow 0.2s ease-in-out,
+        transform 0.2s ease-in-out;
+    }
+
+    // Block-level so the figure hugs the image exactly — an inline img leaves
+    // descender space below it, which the hover shadow exposed as a pale strip.
+    img {
+      display: block;
+    }
   }
 
   &__title {
@@ -78,7 +93,7 @@
 
   &__view-all {
     text-decoration: none;
-    color: var(--color-ink-soft);
+    color: var(--color-accent-text);
     position: relative;
     transition: color 0.3s ease;
 

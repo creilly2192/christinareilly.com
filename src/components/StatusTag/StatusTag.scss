@@ -4,16 +4,22 @@
   font-family: var(--font-body);
   /* 14px — the mockup's 11px read too small; matches the smallest text size
      already used elsewhere on the site (ReadingList/ListeningList meta text). */
-  font-size: 0.875rem;
+  font-size: var(--status-tag-font-size, 0.875rem);
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: lowercase;
-  color: var(--color-ink-mute);
-  margin-top: 0.5rem;
+  /* Parents restyle the tag by setting these custom properties, not by
+     targeting .status-tag — Astro's scoping makes a parent's selector for a
+     child's element silently dead, but custom properties inherit through.
+     No fallback on color on purpose: unset, it inherits the parent's text color. */
+  color: var(--status-tag-color);
+  margin-top: var(--status-tag-margin-top, 0);
 }
 
 .status-tag--returned {
-  color: var(--color-ink-mute);
+  color: var(--status-tag-color, var(--color-ink-mute));
 }
 
-.status-tag--reading {}
+.status-tag--ongoing {
+  color: var(--color-accent-text);
+}
