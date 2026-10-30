@@ -55,16 +55,13 @@ export const projects: ProjectItem[] = [
     role: "Design & build",
     since: "2016",
     // No link on purpose — visitors are already on it.
-    // Placeholder — reuses AlbumLog's screenshot until this site has its own.
-    // Alt text says so, so screen readers aren't told it's this site.
     image: {
-      src: "albumlog.webp",
-      alt: "Placeholder screenshot (AlbumLog)",
-      width: 1200,
-      height: 651,
+      src: "cr.webp",
+      alt: "Screenshot of christinareilly.com",
+      width: 814,
+      height: 588,
     },
-    // Draft copy — Christina to confirm.
-    note: "The site you're on: a running, dated log of what I'm reading, listening to, and building.",
+    note: "This site: a running, dated log of what I'm reading, listening to, and building.",
     status: "active",
   },
 ];

@@ -25,9 +25,6 @@ const currentReads = items.filter((i) => i.status === "current");
               <ul class="reading-list">
                 {currentReads.map((item) => (
                   <li class="reading-list__item">
-                    {/* {item.status === "current" ? (
-              <span class="reading-list__status" />
-            ) : null} */}
                     <div class="reading-list__inner">
                       {item.cover && (
                         <a

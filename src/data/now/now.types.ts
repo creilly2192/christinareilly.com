@@ -21,8 +21,6 @@ export type ReadingItem =
 export type ListeningItem = {
   title: string;
   artist: string;
-  note?: string;
-  link?: string;
 };
 
 // Every Working On card reads as ongoing, not a discrete edited artifact —

@@ -4,8 +4,6 @@
 
 /* Working On — bento grid. Card 0 is the hero block, card 1 a wide banner,
    everything after a small tile (see WorkingList.astro's sizeForIndex). */
-.working-list__kicker {
-}
 
 .section-working {
   background-color: var(--color-paper-deep);
@@ -70,8 +68,12 @@
 }
 
 /* Visible focus for project cards' whole-card link (see .working-list__card
-   below — it can't show its own focus ring). */
-.working-list__item:focus-within {
+   below — it can't show its own focus ring). Matches the site-wide
+   a:focus-visible ring in _base.scss. :has(:focus-visible) rather than
+   :focus-within so it shows for keyboard focus only, not on mouse click. */
+.working-list__item:has(:focus-visible) {
+  outline: 2px solid var(--color-link-hover);
+  outline-offset: 3px;
 }
 
 .working-list__item--hero {
@@ -82,7 +84,10 @@
   --rot: -1.4deg;
   /* Read by StatusTag.scss — see the note there on why not .working-list__tag. */
   --status-tag-color: var(--color-white);
-  --status-tag-font-size: 1.125rem;
+  // White on blush is only 3.18:1 — passes AA as "large text" (3:1), which
+  // for bold means at least ~18.7px. So 19px semibold, not 18px regular.
+  --status-tag-font-size: 1.1875rem;
+  --status-tag-font-weight: 600;
 
   .working-list__text {
     margin-top: auto;
@@ -188,17 +193,26 @@
   font-weight: 400;
 }
 
-/* Project cards only — wraps the whole card as a link. `display: contents`
-   is load-bearing, not a design choice: it keeps this element out of the
-   flex layout so .working-list__item's existing padding/flex rules above
-   keep working unchanged with the new wrapper in the DOM. Side effect:
-   `display: contents` elements can't render their own focus ring in most
-   browsers, so the visible-focus style (Accessibility Checklist) needs to
-   go on the ancestor via :focus-within instead — see .working-list__item
-   above for where to add it. */
+/* Wraps each card's contents — an <a> on project cards (whole-card link),
+   a plain <div> otherwise. Fills the card and repeats .working-list__item's
+   column layout so the content sits the same either way.
+
+   Not `display: contents` (used previously): Safari and some Chrome versions
+   drop a display:contents link from the tab order entirely, so keyboard
+   users skipped both project cards. */
 .working-list__card {
-  display: contents;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
   color: inherit;
+  text-decoration: none;
+
+  // The card (.working-list__item) draws the focus ring instead — the
+  // link's own ring would sit inside the card's padding.
+  &:focus-visible {
+    outline: none;
+  }
 
   &:before {
     content: "";
@@ -208,10 +222,4 @@
     width: 100%;
     height: 100%;
   }
-}
-
-.working-list__title {
-}
-
-.working-list__external-icon {
 }

@@ -67,11 +67,7 @@ const sizeForIndex = (i: number) => {
                       <p class="working-list__title">{item.title}</p>
                     )}
                     <p class="working-list__text">{item.text}</p>
-                    <StatusTag
-                      variant="since"
-                      date={item.since}
-                      class="working-list__tag"
-                    />
+                    <StatusTag variant="since" date={item.since} />
                   </CardTag>
                 </li>
               );

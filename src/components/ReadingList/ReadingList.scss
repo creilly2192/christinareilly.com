@@ -10,12 +10,6 @@
     position: relative;
   }
 
-  &__fade-wrapper {
-    max-height: 23.4375rem;
-    overflow-y: auto;
-    padding-bottom: 3rem;
-  }
-
   &__item {
     padding: 1rem 0;
     /**border-bottom: 0.0625rem solid var(--border);**/
@@ -28,11 +22,6 @@
   &__inner {
     display: flex;
     gap: 1rem;
-  }
-
-  &__finished {
-    text-align: right;
-    padding-left: 1.5rem;
   }
 
   &__link:hover {
@@ -79,12 +68,6 @@
     font-size: 0.875rem;
     margin-top: 0.25rem;
     text-wrap: pretty;
-  }
-
-  &__status {
-    text-transform: capitalize;
-    margin-bottom: 1rem;
-    display: inline-block;
   }
 
   &__content {

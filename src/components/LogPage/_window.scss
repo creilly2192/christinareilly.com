@@ -13,15 +13,13 @@
   // Wider first column than the book-cover default — screenshots are landscape.
   grid-template-columns: 15.5rem 1fr auto;
 
-  // Tablet: LogPage.scss stacks every row below $desktop, which left the
-  // screenshot, text, and status tag in one long column. Keep the screenshot
-  // beside the text instead, with the status tag dropped under the text.
+  // Tablet: the wide screenshot + text + status tag don't fit in three
+  // columns, so drop the status tag under the text, screenshot still beside it.
   @media only screen and (max-width: $desktop) {
-    display: grid;
     grid-template-columns: 13rem 1fr;
     row-gap: 1rem;
 
-    .log-page__cover-link {
+    .log-page__cover {
       grid-row: span 2;
     }
 
@@ -47,10 +45,6 @@
   overflow: hidden;
   @include motion-safe {
     transition: transform 0.2s ease-in-out;
-
-    &:hover {
-      transform: rotate(-3deg);
-    }
   }
 
   @media only screen and (max-width: $desktop) {
@@ -67,6 +61,16 @@
     @media only screen and (max-width: $desktop) {
       height: auto;
     }
+  }
+}
+
+// Tilt on row hover/focus, not on the image itself — the title link's
+// stretched click area sits on top of the image, so the image never
+// receives :hover directly.
+.log-page__list--window .log-page__row:hover .log-page__cover--window,
+.log-page__list--window .log-page__row:focus-within .log-page__cover--window {
+  @include motion-safe {
+    transform: rotate(-3deg);
   }
 }
 

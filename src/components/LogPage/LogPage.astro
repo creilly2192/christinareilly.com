@@ -1,17 +1,10 @@
 ---
 // Reusable "log page" layout — header + labeled sections of rows (cover,
-// title, meta, note, trailing status tag). Built for /reading-log; meant to
-// be reused by any future page with the same shape (e.g. a projects log) by
-// passing a differently-sourced `sections` array.
+// title, meta, note, trailing status tag). Used by /reading-log and
+// /projects; each page maps its own data into the `sections` shape.
 //
-// Deliberately fully data-driven (no slots): a plain <style> block written
-// directly in a src/pages/*.astro file does not get compiled into any CSS
-// output in this project's Astro setup (confirmed via minimal repro — plain
-// CSS, SCSS, with/without @use, with/without other components present, all
-// silently produced zero output). Keeping the header/sections/rows markup
-// entirely inside this component's own template — not slotted in from a
-// page file — sidesteps that entirely and matches how every other styled
-// piece of this site is already built.
+// Fully data-driven (no slots), so all the markup — and the scoped styles
+// that target it — lives in this one component.
 import StatusTag from "../StatusTag/StatusTag.astro";
 import Icon from "../Icon/Icon.astro";
 
@@ -78,41 +71,51 @@ const {
           <ul class:list={["log-page__list", `log-page__list--${coverStyle}`]}>
             {section.items.map((item) => (
               <li class="log-page__row">
+                {/* Not a link on its own — the title link stretches over the
+                    whole row (see .log-page__title-link), so the cover is
+                    still clickable without a duplicate tab stop. */}
                 {item.coverSrc && (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="log-page__cover-link"
+                  <figure
+                    class:list={[
+                      "log-page__cover",
+                      `log-page__cover--${coverStyle}`,
+                    ]}
                   >
-                    <figure
-                      class:list={[
-                        "log-page__cover",
-                        `log-page__cover--${coverStyle}`,
-                      ]}
-                    >
-                      {coverStyle === "window" && (
-                        <div class="log-page__window-bar" aria-hidden="true">
-                          <span class="log-page__window-dot log-page__window-dot--a" />
-                          <span class="log-page__window-dot log-page__window-dot--b" />
-                          <span class="log-page__window-dot log-page__window-dot--c" />
-                        </div>
-                      )}
-                      <img
-                        src={`${base}${item.coverSrc}`}
-                        alt={item.coverAlt ?? `Cover of ${item.title}`}
-                        loading="lazy"
-                        decoding="async"
-                        width={item.coverWidth ?? 175}
-                        height={item.coverHeight ?? 230}
-                        class="log-page__cover-img"
-                      />
-                    </figure>
-                  </a>
+                    {coverStyle === "window" && (
+                      <div class="log-page__window-bar" aria-hidden="true">
+                        <span class="log-page__window-dot log-page__window-dot--a" />
+                        <span class="log-page__window-dot log-page__window-dot--b" />
+                        <span class="log-page__window-dot log-page__window-dot--c" />
+                      </div>
+                    )}
+                    <img
+                      src={`${base}${item.coverSrc}`}
+                      alt={item.coverAlt ?? `Cover of ${item.title}`}
+                      loading="lazy"
+                      decoding="async"
+                      width={item.coverWidth ?? 175}
+                      height={item.coverHeight ?? 230}
+                      class="log-page__cover-img"
+                    />
+                  </figure>
                 )}
                 <div class="log-page__content">
                   <p class="log-page__title-text">
-                    <strong>{item.title}</strong>
+                    {/* The row's only link. Its click area is stretched over
+                        the whole row in CSS, so the cover and the arrow are
+                        clickable too — one tab stop per row, not three. */}
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="log-page__title-link"
+                      >
+                        <strong>{item.title}</strong>
+                      </a>
+                    ) : (
+                      <strong>{item.title}</strong>
+                    )}
                   </p>
                   <div class="log-page__meta">
                     {item.author && (

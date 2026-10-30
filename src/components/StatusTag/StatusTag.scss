@@ -5,7 +5,7 @@
   /* 14px — the mockup's 11px read too small; matches the smallest text size
      already used elsewhere on the site (ReadingList/ListeningList meta text). */
   font-size: var(--status-tag-font-size, 0.875rem);
-  font-weight: 400;
+  font-weight: var(--status-tag-font-weight, 400);
   letter-spacing: 0.08em;
   text-transform: lowercase;
   /* Parents restyle the tag by setting these custom properties, not by
