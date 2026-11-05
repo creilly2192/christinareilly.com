@@ -122,7 +122,9 @@ const {
                       <span class="log-page__author">{item.author}</span>
                     )}
                     {item.year && (
-                      <span class="log-page__year">· {item.year}</span>
+                      // Leading space is explicit — Astro 7 drops the line
+                      // break between the author and year spans.
+                      <span class="log-page__year">{` · ${item.year}`}</span>
                     )}
                   </div>
                   {item.note && <p class="log-page__note">{item.note}</p>}

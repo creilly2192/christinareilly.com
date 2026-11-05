@@ -50,10 +50,12 @@ const currentReads = items.filter((i) => i.status === "current");
                           <strong>{item.title}</strong>
                         </p>
                         <div class="reading-list__meta">
+                          {/* Explicit spaces around the dot — Astro 7 drops
+                              line breaks between text and elements. */}
                           <span class="reading-list__author">
                             {item.author}
                           </span>
-                          ·
+                          {" · "}
                           <span class="reading-list__year">
                             {item.year_published}
                           </span>

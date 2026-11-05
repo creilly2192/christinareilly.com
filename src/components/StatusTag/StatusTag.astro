@@ -13,11 +13,15 @@ type Props = {
 };
 
 const { variant, date, label, class: className } = Astro.props as Props;
+
+// Joined into one string here, not left as two {expressions} on separate
+// lines — Astro 7's HTML compression drops that line break, so the
+// word and date ran together ("sincenov 2022").
+const text = [label ?? variant, date].filter(Boolean).join(" ");
 ---
 
 <span class:list={["status-tag", `status-tag--${variant}`, className]}>
-  {label ?? variant}
-  {date}
+  {text}
 </span>
 
 <style lang="scss">

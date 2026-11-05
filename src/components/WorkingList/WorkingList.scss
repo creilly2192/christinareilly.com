@@ -91,6 +91,7 @@
 
   .working-list__text {
     margin-top: auto;
+    font-family: var(--font-heading);
     font-size: 1.875rem;
     font-weight: 600;
     line-height: 1.18;
@@ -129,7 +130,7 @@
 .working-list__item--tile {
   grid-column: span 3;
   grid-row: span 1;
-  background-color: var(--color-card-sea-bg);
+  background-color: var(--color-card-sea-bg-light);
   color: var(--color-card-sea-text);
   padding: 1.25rem 1.375rem;
   --rot: -1.6deg;
