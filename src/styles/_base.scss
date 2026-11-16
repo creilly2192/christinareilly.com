@@ -68,6 +68,13 @@ main {
   display: block;
 }
 
+/* Header + hero band (see BaseLayout.astro). Only pages that fill the
+   "hero" slot get the faint tiled star wallpaper behind it. */
+.hero-band--pattern {
+  background-image: url("/patterns/stars.svg");
+  background-size: 160px 160px;
+}
+
 .container {
   max-width: 68rem;
   margin: 0 auto;

@@ -6,6 +6,57 @@
         <span class="hero-main__dot hero-main__dot--b"></span>
         <span class="hero-main__dot hero-main__dot--c"></span>
       </div>
+      <div class="hero-main__toolbar">
+        <div class="hero-main__address">
+          <span class="hero-main__favicon" aria-hidden="true">✦</span>
+          <span class="hero-main__url">
+            https://www.<span class="hero-main__url-host">christinareilly</span
+            >.com
+          </span>
+          <span class="hero-main__fave-wrap">
+            <span
+              class="hero-main__fave-burst"
+              aria-hidden="true"
+              data-fave-burst
+            >
+              <span
+                class="hero-main__spark hero-main__spark--tangerine"
+                style="--x: -34px; --y: -38px; --r: -40deg; --d: 0s; --s: 1.25rem"
+                >✦</span
+              >
+              <span
+                class="hero-main__spark hero-main__spark--sea"
+                style="--x: -6px; --y: -50px; --r: 30deg; --d: 0.06s; --s: 1rem"
+                >✧</span
+              >
+              <span
+                class="hero-main__spark hero-main__spark--matcha"
+                style="--x: 26px; --y: -42px; --r: 60deg; --d: 0.12s; --s: 1.375rem"
+                >✦</span
+              >
+              <span
+                class="hero-main__spark hero-main__spark--blush"
+                style="--x: 52px; --y: -26px; --r: -20deg; --d: 0.04s; --s: 0.875rem"
+                >♥</span
+              >
+              <span
+                class="hero-main__spark hero-main__spark--blush"
+                style="--x: -56px; --y: -18px; --r: 45deg; --d: 0.1s; --s: 0.875rem"
+                >✧</span
+              >
+            </span>
+            <button
+              class="hero-main__fave"
+              type="button"
+              aria-pressed="false"
+              data-fave
+            >
+              <span class="hero-main__fave-off">♡ add to favorites</span>
+              <span class="hero-main__fave-on">♥ added to favorites!</span>
+            </button>
+          </span>
+        </div>
+      </div>
       <div class="hero-main__content">
         <h1 class="hero-main__title">
           {/* Explicit space — Astro 7 drops the line break before the span. */}
@@ -40,6 +91,25 @@
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       document.documentElement.classList.add("js-loaded");
+    });
+  });
+</script>
+
+<script>
+  // "Add to favorites" toggle in the fake address bar — purely decorative,
+  // nothing is saved. Each "add" replays the star puff above the button:
+  // dropping the class and forcing a reflow restarts the CSS animation.
+  document.querySelectorAll<HTMLButtonElement>("[data-fave]").forEach((btn) => {
+    const burst =
+      btn.parentElement?.querySelector<HTMLElement>("[data-fave-burst]");
+    btn.addEventListener("click", () => {
+      const pressed = btn.getAttribute("aria-pressed") === "true";
+      btn.setAttribute("aria-pressed", String(!pressed));
+      if (!pressed && burst) {
+        burst.classList.remove("is-bursting");
+        void burst.offsetWidth;
+        burst.classList.add("is-bursting");
+      }
     });
   });
 </script>

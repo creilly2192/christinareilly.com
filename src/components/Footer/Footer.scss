@@ -8,6 +8,53 @@ footer {
   }
 }
 
+.footer__divider {
+  display: flex;
+  align-items: center;
+  gap: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+.footer__divider-line {
+  flex: 1;
+  height: 1.5px;
+  background-color: var(--color-rule);
+}
+
+.footer__charms {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer__charm {
+  width: 1.25rem;
+  height: 1.25rem;
+  transform: rotate(var(--rot));
+
+  * {
+    stroke: var(--color-ink);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+  }
+}
+
+.footer__charm--blush {
+  fill: var(--color-card-blush-bg);
+}
+
+.footer__charm--tangerine {
+  fill: var(--color-card-tangerine-bg);
+}
+
+.footer__charm--sea {
+  fill: var(--color-card-sea-bg);
+}
+
+.footer__charm--matcha {
+  fill: var(--color-card-matcha-bg);
+}
+
 .footer__grid {
   display: grid;
   grid-template-columns: 1fr auto;

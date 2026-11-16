@@ -44,6 +44,9 @@
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  // Same ink outline + hard offset shadow as the hero browser window.
+  border: 2.5px solid var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-ink);
   // Gap between the card text and its since-tag — read by StatusTag.scss.
   --status-tag-margin-top: 0.5rem;
   transition: box-shadow 0.25s ease;
@@ -53,13 +56,15 @@
       transform 0.25s ease,
       box-shadow 0.25s ease;
 
+    // Lifts up-left while the shadow grows, so the card reads as rising
+    // off the page rather than sliding.
     &:hover {
-      transform: translateY(-6px) rotate(var(--rot, -1deg));
+      transform: translate(-3px, -5px) rotate(var(--rot, -1deg));
     }
   }
 
   &:hover {
-    box-shadow: 0 16px 28px rgba(36, 26, 16, 0.18);
+    box-shadow: 9px 11px 0 var(--color-ink);
 
     :global(.icon-badge) {
       opacity: 1 !important;

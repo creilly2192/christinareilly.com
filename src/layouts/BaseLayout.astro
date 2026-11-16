@@ -6,6 +6,8 @@ import "@fontsource/jost/600.css";
 import "@fontsource/instrument-sans/400.css";
 import "@fontsource/instrument-sans/500.css";
 import "@fontsource/instrument-sans/600.css";
+// 90s-edition pixel accents: hero address bar + the header "hello" stamp.
+import "@fontsource/vt323/400.css";
 
 import { SEO } from "astro-seo";
 
@@ -34,7 +36,19 @@ import Footer from "../components/Footer/Footer.astro";
   </head>
   <body>
     <main>
-      <Header />
+      {
+        /* The header and an optional "hero" slot share one band so the star
+          pattern tiles across both without a seam between them. */
+      }
+      <div
+        class:list={[
+          "hero-band",
+          { "hero-band--pattern": Astro.slots.has("hero") },
+        ]}
+      >
+        <Header />
+        <slot name="hero" />
+      </div>
       <slot />
       <Footer />
     </main>
