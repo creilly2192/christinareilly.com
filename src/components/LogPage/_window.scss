@@ -52,11 +52,18 @@
     max-width: 20rem;
   }
 
-  // Overrides the book-cover sizing above: keep the screenshot's own
-  // aspect ratio, and block-level so no inline gap shows under it.
+  // Overrides the book-cover sizing above. Every screenshot gets the same
+  // 16:10 frame so rows line up, whatever shape the file is (they vary:
+  // ~1.4:1 to ~2:1). object-fit: cover crops the overflow; center keeps
+  // a centered logo centered, and wider screenshots only lose their sides.
+  // Block-level so no inline gap shows under it.
   .log-page__cover-img {
     display: block;
+    width: 100%;
     height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: center;
 
     @media only screen and (max-width: $desktop) {
       height: auto;

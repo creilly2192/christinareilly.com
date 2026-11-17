@@ -21,6 +21,13 @@ const {
   description = "I'm Christina Reilly, a senior web developer in Miami.",
 } = Astro.props as Props;
 
+// Link previews (Slack, iMessage, social). Crawlers need absolute URLs, so
+// build them from `site` in astro.config.mjs. One shared image for every
+// page for now: public/og.png, 1200×630, a render of the hero window.
+const ogImage = new URL("/og.png", Astro.site).href;
+const ogImageAlt =
+  "Christina makes things for the web — christinareilly.com, shown in a retro browser window.";
+
 import "../styles/global.scss";
 
 import Header from "../components/Header/Header.astro";
@@ -30,9 +37,43 @@ import Footer from "../components/Footer/Footer.astro";
 <!doctype html>
 <html lang="en">
   <head>
-    <SEO title={title} description={description} />
+    <SEO
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          image: ogImage,
+          url: Astro.url,
+        },
+        optional: {
+          description,
+          siteName: "Christina Reilly",
+          locale: "en_US",
+        },
+        image: {
+          alt: ogImageAlt,
+          width: 1200,
+          height: 630,
+          type: "image/png",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        image: ogImage,
+        imageAlt: ogImageAlt,
+      }}
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    {
+      /* Favicon: the header's "cr" + star mark. SVG for modern browsers, .ico
+        (16/32/48) as the fallback, PNG for iOS home-screen icons. */
+    }
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body>
     <main>

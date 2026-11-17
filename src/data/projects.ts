@@ -10,7 +10,8 @@ type ProjectItemBase = {
   link?: string;
   since?: string; // display string, same format as the homepage Working On cards, e.g. "aug 2026"
   // Screenshot in public/projects/ — width/height are the file's real pixel
-  // size, used only so the browser can reserve the right aspect ratio.
+  // size. Any shape works: the frame crops every screenshot to 16:10 (see
+  // LogPage/_window.scss), so it can be a bit off without breaking the row.
   image?: { src: string; alt: string; width: number; height: number };
 };
 
@@ -45,8 +46,8 @@ export const projects: ProjectItem[] = [
     image: {
       src: "albumlog.webp",
       alt: "Screenshot of AlbumLog",
-      width: 1200,
-      height: 651,
+      width: 2932,
+      height: 1472,
     },
     status: "active",
   },

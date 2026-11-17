@@ -51,8 +51,19 @@
               aria-pressed="false"
               data-fave
             >
-              <span class="hero-main__fave-off">♡ add to favorites</span>
-              <span class="hero-main__fave-on">♥ added to favorites!</span>
+              {
+                /* One fixed name for screen readers; aria-pressed carries the
+                  on/off state. The swapping visible text (and the hearts,
+                  read aloud as "white heart suit") are hidden from them —
+                  otherwise the state is announced twice. */
+              }
+              <span class="visually-hidden">add to favorites</span>
+              <span class="hero-main__fave-off" aria-hidden="true">
+                ♡ add to favorites
+              </span>
+              <span class="hero-main__fave-on" aria-hidden="true">
+                ♥ added to favorites!
+              </span>
             </button>
           </span>
         </div>
