@@ -23,6 +23,5 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# Claude Code
-CLAUDE.md
-christinareilly.png
+# design mockup reference files — not part of the built site
+public/designs/

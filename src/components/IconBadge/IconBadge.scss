@@ -1,0 +1,26 @@
+/* Ledger icon badge — two shapes: "folder" (default, folder-tab silhouette,
+   used for section headings) and "sticker" (rounded blob, decorative). See
+   public/designs/direction-a.jsx's IconBadge for the reference layout. */
+.icon-badge {
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255);
+  opacity: 0.32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.icon-badge__icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}

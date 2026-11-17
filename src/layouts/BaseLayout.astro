@@ -1,42 +1,97 @@
 ---
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/crimson-pro/400.css";
-import "@fontsource/crimson-pro/500.css";
-import "@fontsource/crimson-pro/600.css";
+// Ledger redesign fonts — only the weights actually referenced in CSS right
+// now (headings/em at Jost 600; nav, hero deck, and body text at Instrument
+// Sans 400). Add more weights only alongside the CSS that uses them.
+import "@fontsource/jost/600.css";
+import "@fontsource/instrument-sans/400.css";
+import "@fontsource/instrument-sans/500.css";
+import "@fontsource/instrument-sans/600.css";
+// 90s-edition pixel accents: hero address bar + the header "hello" stamp.
+import "@fontsource/vt323/400.css";
 
 import { SEO } from "astro-seo";
 
-// interface Props {
-//   title: string;
-//   description?: string;
-// }
+type Props = {
+  title?: string;
+  description?: string;
+};
 
-// const { title, description } = Astro.props;
+const {
+  title = "Christina Reilly - Senior Web Developer",
+  description = "I'm Christina Reilly, a senior web developer in Miami.",
+} = Astro.props as Props;
 
-import "../styles/global.css";
+// Link previews (Slack, iMessage, social). Crawlers need absolute URLs, so
+// build them from `site` in astro.config.mjs. One shared image for every
+// page for now: public/og.png, 1200×630, a render of the hero window.
+const ogImage = new URL("/og.png", Astro.site).href;
+const ogImageAlt =
+  "Christina makes things for the web — christinareilly.com, shown in a retro browser window.";
 
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import "../styles/global.scss";
 
+import Header from "../components/Header/Header.astro";
+import Footer from "../components/Footer/Footer.astro";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SEO
-      title="Christina Reilly Portfolio"
-      description="Senior web developer."
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          image: ogImage,
+          url: Astro.url,
+        },
+        optional: {
+          description,
+          siteName: "Christina Reilly",
+          locale: "en_US",
+        },
+        image: {
+          alt: ogImageAlt,
+          width: 1200,
+          height: 630,
+          type: "image/png",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        image: ogImage,
+        imageAlt: ogImageAlt,
+      }}
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    {
+      /* Favicon: the header's "cr" + star mark. SVG for modern browsers, .ico
+        (16/32/48) as the fallback, PNG for iOS home-screen icons. */
+    }
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
-  <body> 
-    
+  <body>
     <main>
+      {
+        /* The header and an optional "hero" slot share one band so the star
+          pattern tiles across both without a seam between them. */
+      }
+      <div
+        class:list={[
+          "hero-band",
+          { "hero-band--pattern": Astro.slots.has("hero") },
+        ]}
+      >
         <Header />
-        <slot />
-        <Footer />
+        <slot name="hero" />
+      </div>
+      <slot />
+      <Footer />
     </main>
   </body>
 </html>

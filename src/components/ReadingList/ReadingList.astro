@@ -1,0 +1,86 @@
+---
+import type { ReadingItem } from "../../data/now/now.types";
+import Icon from "../Icon/Icon.astro";
+
+const base = import.meta.env.BASE_URL;
+
+type Props = { items?: ReadingItem[] };
+const { items = [] } = Astro.props as Props;
+
+const currentReads = items.filter((i) => i.status === "current");
+---
+
+<div class="section-now__grid-item section-now--reading">
+  <h3 class="section-now__subheading">
+    <Icon name="book" size={14} />Currently Reading
+  </h3>
+  {
+    items.length === 0 ? (
+      <p class="muted">Nothing listed yet.</p>
+    ) : (
+      <>
+        <div class="reading-list__wrapper">
+          {currentReads.length > 0 && (
+            <>
+              <ul class="reading-list">
+                {currentReads.map((item) => (
+                  <li class="reading-list__item">
+                    <div class="reading-list__inner">
+                      {item.cover && (
+                        <a
+                          href={`${item.goodreadsLink}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="reading-list__link"
+                        >
+                          <figure class="reading-list__cover">
+                            <img
+                              src={`${base}covers/${item.cover}`}
+                              alt={item.coverAlt ?? `Cover of ${item.title}`}
+                              loading="lazy"
+                              decoding="async"
+                              width="72"
+                              height="108"
+                            />
+                          </figure>
+                        </a>
+                      )}
+                      <div class="reading-list__content">
+                        <p class="reading-list__title">
+                          <strong>{item.title}</strong>
+                        </p>
+                        <div class="reading-list__meta">
+                          {/* Explicit spaces around the dot — Astro 7 drops
+                              line breaks between text and elements. */}
+                          <span class="reading-list__author">
+                            {item.author}
+                          </span>
+                          {" · "}
+                          <span class="reading-list__year">
+                            {item.year_published}
+                          </span>
+                        </div>
+
+                        {item.note ? (
+                          <p class="reading-list__note">{item.note}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <a href="/reading-log" class="reading-list__view-all">
+                view full reading log{" "}
+              </a>
+            </>
+          )}
+        </div>
+      </>
+    )
+  }
+</div>
+
+<style lang="scss">
+  @use "./ReadingList.scss";
+</style>

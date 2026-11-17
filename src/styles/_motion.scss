@@ -1,0 +1,9 @@
+// Wrap anything that moves (transform transitions/animations, smooth
+// scrolling) in this mixin so it only runs for people who haven't asked
+// their OS to reduce motion. Opt-in rather than a global "reduce" override,
+// so reduced-motion users get no movement at all — not just faster movement.
+@mixin motion-safe {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}

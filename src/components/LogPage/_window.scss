@@ -1,0 +1,110 @@
+@use "../../styles/_breakpoints" as *;
+@use "../../styles/motion" as *;
+
+/* Projects-log-only styles (coverStyle="window"). Loaded after LogPage.scss
+   from LogPage.astro's <style> block — not via @use inside LogPage.scss,
+   since Sass requires @use at the top of a file, which would put these
+   rules *before* the book-cover rules they need to override. */
+
+/* Mini retro browser window around project screenshots — a scaled-down
+   copy of the Hero's chrome (.hero-main__window in Hero.scss): same ink
+   border, hard-offset shadow, blush title bar, and three colored dots. */
+.log-page__list--window .log-page__row {
+  // Wider first column than the book-cover default — screenshots are landscape.
+  grid-template-columns: 15.5rem 1fr auto;
+
+  // Tablet: the wide screenshot + text + status tag don't fit in three
+  // columns, so drop the status tag under the text, screenshot still beside it.
+  @media only screen and (max-width: $desktop) {
+    grid-template-columns: 13rem 1fr;
+    row-gap: 1rem;
+
+    .log-page__cover {
+      grid-row: span 2;
+    }
+
+    .log-page__content {
+      align-self: start;
+    }
+
+    .log-page__status {
+      grid-column: 2;
+    }
+  }
+
+  // Phone: back to LogPage.scss's single stacked column.
+  @media only screen and (max-width: $mobile) {
+    display: flex;
+  }
+}
+
+.log-page__cover--window {
+  border-radius: 0.5rem;
+  border: 2px solid var(--color-ink);
+  box-shadow: 6px 6px 0px rgb(36, 26, 16);
+  overflow: hidden;
+  @include motion-safe {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  @media only screen and (max-width: $desktop) {
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  // Overrides the book-cover sizing above. Every screenshot gets the same
+  // 16:10 frame so rows line up, whatever shape the file is (they vary:
+  // ~1.4:1 to ~2:1). object-fit: cover crops the overflow; center keeps
+  // a centered logo centered, and wider screenshots only lose their sides.
+  // Block-level so no inline gap shows under it.
+  .log-page__cover-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: center;
+
+    @media only screen and (max-width: $desktop) {
+      height: auto;
+    }
+  }
+}
+
+// Tilt on row hover/focus, not on the image itself — the title link's
+// stretched click area sits on top of the image, so the image never
+// receives :hover directly.
+.log-page__list--window .log-page__row:hover .log-page__cover--window,
+.log-page__list--window .log-page__row:focus-within .log-page__cover--window {
+  @include motion-safe {
+    transform: rotate(-3deg);
+  }
+}
+
+.log-page__window-bar {
+  background-color: var(--color-card-blush-bg);
+  padding: 0.5rem 0.625rem;
+  border-bottom: 2px solid var(--color-ink);
+  display: flex;
+  gap: 0.3125rem;
+}
+
+.log-page__window-dot {
+  width: 0.5625rem;
+  height: 0.5625rem;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid var(--color-ink);
+}
+
+.log-page__window-dot--a {
+  background-color: var(--color-card-matcha-bg);
+}
+
+.log-page__window-dot--b {
+  background-color: var(--color-card-tangerine-bg);
+}
+
+.log-page__window-dot--c {
+  background-color: var(--color-card-sea-bg);
+}

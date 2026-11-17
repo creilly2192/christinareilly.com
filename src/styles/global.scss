@@ -1,0 +1,9 @@
+@use "./tokens";
+@use "./reset";
+@use "./base";
+
+/* =====================================================================
+   COMPONENT STYLES — being migrated to per-component .scss files one at
+   a time (see CLAUDE.md, "Live Data + SCSS Conversion" > Track B). Don't
+   add anything new here; add it to the component's own folder instead.
+   ===================================================================== */

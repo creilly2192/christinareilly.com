@@ -1,0 +1,13 @@
+<!-- Tiled star wallpaper behind the header + hero band (see .hero-band in
+     _base.scss). Kept very faint via the group opacity. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+<g fill-opacity="0.2">
+  <path d="M24 23L25.96 28.04L31 30L25.96 31.96L24 37L22.04 31.96L17 30L22.04 28.04Z" fill="#e36888"/>
+  <path d="M110 18L111.12 20.88L114 22L111.12 23.12L110 26L108.88 23.12L106 22L108.88 20.88Z" fill="#f08c21"/>
+  <path d="M70 83L71.4 86.6L75 88L71.4 89.4L70 93L68.6 89.4L65 88L68.6 86.6Z" fill="#6698cc"/>
+  <path d="M138 113L139.96 118.04L145 120L139.96 121.96L138 127L136.04 121.96L131 120L136.04 118.04Z" fill="#b4b534"/>
+  <path d="M30 128L31.12 130.88L34 132L31.12 133.12L30 136L28.88 133.12L26 132L28.88 130.88Z" fill="#e36888"/>
+  <circle cx="96" cy="60" r="1.6" fill="#f08c21"/>
+  <circle cx="50" cy="62" r="1.2" fill="#6698cc"/>
+</g>
+</svg>

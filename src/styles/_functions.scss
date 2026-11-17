@@ -1,0 +1,17 @@
+// Fluid-value helpers. Each component's SCSS is compiled as its own Sass
+// module (Astro scopes it per-component), so this isn't picked up globally
+// via global.scss — any file that wants rv() needs its own:
+//   @use "../../styles/functions" as *;
+@use "sass:math";
+
+// Scales linearly between $min (at $min-vw) and $max (at $max-vw), clamped
+// outside that range. Usage: padding: rv(2rem, 6rem);
+// Defaults span 20rem (320px) to 90rem (1440px) — override per-call for a
+// narrower/wider scaling range: rv(1rem, 2rem, 30rem, 60rem).
+@function rv($min, $max, $min-vw: 20rem, $max-vw: 90rem) {
+  $slope: math.div($max - $min, $max-vw - $min-vw);
+  $slope-vw: $slope * 100;
+  $intercept: $min - $slope * $min-vw;
+
+  @return clamp(#{$min}, #{$intercept} + #{$slope-vw}vw, #{$max});
+}

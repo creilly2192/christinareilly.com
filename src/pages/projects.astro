@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LogPage from "../components/LogPage/LogPage.astro";
+import { projects } from "../data/projects";
+
+const activeProjects = projects.filter((item) => item.status === "active");
+const pastProjects = projects.filter((item) => item.status === "past");
+
+const sections = [
+  {
+    label: "In Progress",
+    items: activeProjects.map((item) => ({
+      href: item.link,
+      coverSrc: item.image ? `projects/${item.image.src}` : undefined,
+      coverAlt: item.image?.alt,
+      coverWidth: item.image?.width,
+      coverHeight: item.image?.height,
+      title: item.title,
+      author: item.role,
+      year: item.year,
+      note: item.note,
+      since: item.since,
+      status: { variant: "ongoing" as const, label: "ongoing" },
+    })),
+  },
+  {
+    label: "Past",
+    items: pastProjects.map((item) => ({
+      href: item.link,
+      coverSrc: item.image ? `projects/${item.image.src}` : undefined,
+      coverAlt: item.image?.alt,
+      coverWidth: item.image?.width,
+      coverHeight: item.image?.height,
+      title: item.title,
+      author: item.role,
+      year: item.year,
+      note: item.note,
+      since: item.since,
+      status: {
+        variant: "returned" as const,
+        label: "ended",
+        date: item.ended,
+      },
+    })),
+  },
+  // No past projects yet — skip any section with nothing in it rather than
+  // rendering an empty heading.
+].filter((section) => section.items.length > 0);
+---
+
+<BaseLayout
+  title="Projects — Christina Reilly"
+  description="Things I build on the side, mostly to scratch my own itch. Some ship, some sit half-finished in a folder."
+>
+  <LogPage
+    title="Projects"
+    deck="Things I build on the side, mostly to scratch my own itch. Some ship, some sit half-finished in a folder."
+    sections={sections}
+    coverStyle="window"
+    linkArrow
+  />
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+// Wraps Icon in the ledger design system's badge shapes — "folder" (a small
+// folder-tab silhouette, used for section headings) and "sticker" (a rounded
+// blob, for decorative accents). Ported from direction-a.jsx's `IconBadge`.
+import Icon, { type IconName } from "../Icon/Icon.astro";
+
+type Props = {
+  name: IconName;
+  fg?: string;
+  shape?: "folder" | "sticker";
+};
+
+const {
+  name,
+  fg = "var(--color-ink)",
+  shape = "folder",
+} = Astro.props as Props;
+---
+
+{
+  shape === "sticker" ? (
+    <span class="icon-badge icon-badge--sticker">
+      <Icon name={name} size={14} color={fg} strokeWidth={2.1} />
+    </span>
+  ) : (
+    <span class="icon-badge icon-badge--folder">
+      <span class="icon-badge__tab" aria-hidden="true" />
+      <span class="icon-badge__body" aria-hidden="true" />
+      <span class="icon-badge__icon">
+        <Icon name={name} size={18} color={fg} strokeWidth={2.2} />
+      </span>
+    </span>
+  )
+}
+
+<style lang="scss">
+  @use "./IconBadge.scss";
+</style>

@@ -1,0 +1,161 @@
+---
+// Reusable "log page" layout — header + labeled sections of rows (cover,
+// title, meta, note, trailing status tag). Used by /reading-log and
+// /projects; each page maps its own data into the `sections` shape.
+//
+// Fully data-driven (no slots), so all the markup — and the scoped styles
+// that target it — lives in this one component.
+import StatusTag from "../StatusTag/StatusTag.astro";
+import Icon from "../Icon/Icon.astro";
+
+const base = import.meta.env.BASE_URL;
+
+type LogRow = {
+  href?: string;
+  coverSrc?: string;
+  coverAlt?: string;
+  // Real pixel size of the image, so the browser reserves the right aspect
+  // ratio. Defaults to the book-cover size.
+  coverWidth?: number;
+  coverHeight?: number;
+  title: string;
+  author?: string;
+  year?: number;
+  note?: string;
+  since?: string; // optional "since [date]" line under the note (projects log)
+  status: {
+    variant: "since" | "returned" | "ongoing";
+    date?: string;
+    label?: string;
+  };
+};
+
+type LogSection = {
+  label: string;
+  items: LogRow[];
+};
+
+type Props = {
+  title: string;
+  deck: string;
+  sections: LogSection[];
+  // "book" = plain cover (reading log); "window" = screenshot inside the
+  // Hero's retro browser-window chrome (projects log).
+  coverStyle?: "book" | "window";
+  // Show an arrow next to the status tag on rows that link out.
+  linkArrow?: boolean;
+};
+
+const {
+  title,
+  deck,
+  sections,
+  coverStyle = "book",
+  linkArrow = false,
+} = Astro.props as Props;
+---
+
+<section class="section log-page">
+  <div class="container">
+    <div class="log-page__header">
+      <h1 class="log-page__title">
+        {title}<span class="color-blush">.</span>
+      </h1>
+      <p class="log-page__deck">{deck}</p>
+    </div>
+
+    {
+      sections.map((section) => (
+        <div class="log-page__section">
+          <h2 class="log-page__section-label">{section.label}</h2>
+          <ul class:list={["log-page__list", `log-page__list--${coverStyle}`]}>
+            {section.items.map((item) => (
+              <li class="log-page__row">
+                {/* Not a link on its own — the title link stretches over the
+                    whole row (see .log-page__title-link), so the cover is
+                    still clickable without a duplicate tab stop. */}
+                {item.coverSrc && (
+                  <figure
+                    class:list={[
+                      "log-page__cover",
+                      `log-page__cover--${coverStyle}`,
+                    ]}
+                  >
+                    {coverStyle === "window" && (
+                      <div class="log-page__window-bar" aria-hidden="true">
+                        <span class="log-page__window-dot log-page__window-dot--a" />
+                        <span class="log-page__window-dot log-page__window-dot--b" />
+                        <span class="log-page__window-dot log-page__window-dot--c" />
+                      </div>
+                    )}
+                    <img
+                      src={`${base}${item.coverSrc}`}
+                      alt={item.coverAlt ?? `Cover of ${item.title}`}
+                      loading="lazy"
+                      decoding="async"
+                      width={item.coverWidth ?? 175}
+                      height={item.coverHeight ?? 230}
+                      class="log-page__cover-img"
+                    />
+                  </figure>
+                )}
+                <div class="log-page__content">
+                  <p class="log-page__title-text">
+                    {/* The row's only link. Its click area is stretched over
+                        the whole row in CSS, so the cover and the arrow are
+                        clickable too — one tab stop per row, not three. */}
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="log-page__title-link"
+                      >
+                        <strong>{item.title}</strong>
+                      </a>
+                    ) : (
+                      <strong>{item.title}</strong>
+                    )}
+                  </p>
+                  <div class="log-page__meta">
+                    {item.author && (
+                      <span class="log-page__author">{item.author}</span>
+                    )}
+                    {item.year && (
+                      // Leading space is explicit — Astro 7 drops the line
+                      // break between the author and year spans.
+                      <span class="log-page__year">{` · ${item.year}`}</span>
+                    )}
+                  </div>
+                  {item.note && <p class="log-page__note">{item.note}</p>}
+                  {item.since && (
+                    <div class="log-page__since">
+                      <StatusTag variant="since" date={item.since} />
+                    </div>
+                  )}
+                </div>
+                <div class="log-page__status">
+                  <StatusTag
+                    variant={item.status.variant}
+                    date={item.status.date}
+                    label={item.status.label}
+                  />
+                  {linkArrow && item.href && (
+                    <span class="log-page__arrow">
+                      <Icon name="arrow-up-right" size={16} />
+                    </span>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style lang="scss">
+  @use "./LogPage.scss";
+  @use "./window";
+</style>
