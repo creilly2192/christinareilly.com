@@ -1,9 +1,18 @@
 # Christinareilly.com
 
-Christina Reilly's personal site, built with [Astro](https://astro.build).
+Christina Reilly's personal site, built with [Astro](https://astro.build). A running, dated log of what I'm reading, listening to, and building.
 
-To run locally: `npm run dev`
+## Running locally
 
-## Redesign
+Requires Node 24 (see `.nvmrc`).
 
-The site is mid-redesign to a new "ledger" design system. Mockups and a design system reference live in `public/designs/` — open `index.html` or `reading-log.html` in a browser to preview (static React/Babel-via-CDN harness, not part of the built site). See `CLAUDE.md` for the full decision log and phase checklist.
+```bash
+npm install
+npm run dev      # local dev server at http://localhost:4321
+npm run build    # static build into dist/
+npm run check    # Prettier + ESLint
+```
+
+## Deploys
+
+The site is fully static and deploys to GitHub Pages via `.github/workflows/astro.yml` on every push to `main`. The workflow also runs daily, so the homepage's "Currently Listening" album (fetched from [AlbumLog](https://albumlog.app) at build time) stays current without a code change. It can be run from the Actions tab.
